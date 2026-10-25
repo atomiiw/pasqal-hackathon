@@ -117,9 +117,9 @@ $s$ is the largest value allowed by the limits: $s \le 55.4 / \max b$, $|{-s\,\b
 | M_seed0 | 30 | 1.274 | 159.4 | True | 353.04 | 353.04 | 0.0% | [-465, -251] | 319 |
 | M_seed1 | 30 | 1.084 | 241.4 | True | 492.61 | 489.32 | 0.7% | [-473, -278] | 483 |
 | M_seed2 | 30 | 1.447 | 129.3 | True | 374.60 | 329.21 | 13.8% | [-399, -173] | 259 |
-| L_seed0 | | (not tuned yet) | | | | | | | |
-| L_seed1 | | (not tuned yet) | | | | | | | |
-| L_seed2 | | (not tuned yet) | | | | | | | |
+| L_seed0 | 60 | 0.063 | 113.2 | True | 475.36 | 475.36 | 0.0% | [-135, -116] | 226 |
+| L_seed1 | 60 | 1.394 | 192.4 | True | 577.22 | 534.58 | 8.0% | [-701, -256] | 385 |
+| L_seed2 | 60 | 0.014 | 151.8 | True | 459.22 | 459.22 | 0.0% | [-156, -153] | 304 |
 
 ## 7. Variable count (Derive 4.1)
 
@@ -139,5 +139,45 @@ $s$ is the largest value allowed by the limits: $s \le 55.4 / \max b$, $|{-s\,\b
 | M_seed0 | 0.1738 | 67.8 | 0.1738 | 80.8 | -37.2 | min_spacing |
 | M_seed1 | 0.1147 | 46.2 | 0.1147 | 54.2 | -22.3 | min_spacing |
 | M_seed2 | 0.2142 | 65.3 | 0.2142 | 85.5 | -48.4 | min_spacing |
+| L_seed0 | 0.2447 | 31.1 | 0.2447 | 33.1 | -4.7 | min_spacing |
+| L_seed1 | 0.1440 | 76.1 | 0.1440 | 100.9 | -64.1 | min_spacing |
+| L_seed2 | 0.1825 | 28.3 | 0.1825 | 28.5 | -0.6 | min_spacing |
+
+## 9. Why model A cannot be laid out, and model B
+
+Model A's couplings are **large between far-apart customers** (they must not share a truck). Large coupling = close atoms. So far customers need close atoms and near customers need far atoms: the coupling graph is the opposite of the map, and for N ≥ 6 no 2D layout reproduces it (measured: η ≈ 1, optimum ranked ≈ 10⁴ of 59049 valid assignments on every M instance; see `notes/embedding-plan.md`).
+
+**Model B changes what the model asks for** (brief §4.1: "Some avoid the inequality altogether by changing what the model asks for").
+
+| | model A (direct) | model B (seeds) |
+|---|---|---|
+| bit | $x_{ik}$: customer $i$ on truck $k$ | $x_i$: customer $i$ is a **seed** (anchors one truck) |
+| atoms | $N$ (K = 2) or $N\cdot K$ | $N$: **4 / 10 / 15** |
+| atom position | fitted to couplings | **the customer map**, scaled by $\alpha$ |
+| energy | $\text{const} + \sum a_a x_a + \sum b_{ab} x_a x_b$ | $-\delta \sum_i x_i + \sum_{i<j} \dfrac{C_6}{(\alpha d_{ij})^6}\, x_i x_j$ |
+| what the ground state is | best clustering, if the layout were exact | the $K$ seeds that are **most spread out** |
+| capacity | penalty $\lambda P_{\text{cap}}$ in the energy | **in the decode**: each non-seed joins the nearest group with room; shots that do not decode are infeasible |
+| equality (one truck per customer) | penalty $A P_{\text{assign}}$ | automatic |
+| price | penalty loss, unembeddable couplings | feasibility rate < 100 %; the clustering cost is optimised only through which seeds are chosen |
+
+**Two numbers set everything, from geometry only (no solver):**
+
+| | formula | meaning |
+|---|---|---|
+| $r_c$ | between $r_K$ and $r_{K+1}$, where $r_j$ = largest $r$ such that $j$ customers are pairwise $\ge r$ apart | customers closer than $r_c$ cannot both be seeds |
+| $\alpha$ | $R_b / r_c$, with $R_b = (C_6/\Omega)^{1/6}$ the blockade radius | map scale: $r_c$ lands on the blockade radius |
+| $\delta_f$ | midpoint of $[\,U_K - U_{K-1},\ U_{K+1} - U_K\,]$, $U_j$ = smallest pair-energy sum over $j$-subsets | exactly $K$ seeds is the ground state, with the largest margin |
+
+Pairs that would land under 5 µm are floored at 5.5 µm (they are blockaded either way). Truth table for one shot (K = 2, customers A..D, Q = 7, demands 1, 4, 3, 4):
+
+| shot | seeds | decode (light) | loads | feasible? |
+|---|---|---|---|---|
+| 1001 | A, D | B→D? 4+4 = 8 > 7 → B→A; C→A? 1+4+3 = 8 → C→D | {A,B} 5, {C,D} 7 | ✅ |
+| 0110 | B, C | A→C, D→? B 4+4 = 8, C 3+1+4 = 8 | – | ❌ (discarded) |
+| 1000 | A | one seed only | – | ❌ (discarded) |
+
+Two decoders, both reported on the same shots: **light** = above, $O(N^2 K)$, the headline; **exact** = cheapest capacity-feasible assignment of the non-seeds to the given seeds (a small generalised assignment problem, classical post-processing, labelled as such).
+
+**Fair baseline.** A sampler uniform over exactly-$K$ seed sets reaches the optimum with probability (#seed sets whose decode is optimal) / $\binom{N}{K}$, computed exactly; results report the device's P(reach) next to it and their ratio. A best gap of 0 % alone is not evidence at these sizes ($\binom{10}{3} = 120$, $\binom{15}{4} = 1365$ seed sets vs 1000 shots).
 
 Regenerate: `python -m cvrp.tune && python -m cvrp.report_qubo`.

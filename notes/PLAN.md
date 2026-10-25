@@ -30,24 +30,24 @@ Two models, one story: the textbook-style QUBO (model A) is derived, its weights
 
 | Brief item | Covered by | Status |
 |---|---|---|
-| Derive 2.1 formal CVRP (sets, params, variables, eq vs ineq) | `notes/qubo.md` §0 | todo |
-| Derive 3.1 what the register minimises | `notes/qubo.md` §5 (E_Pasqal) | todo |
-| Derive 4.1 variable-count table | `notes/qubo.md`, `cvrp/qubo.py:variable_count_table` | done in code |
-| A1 model: variables, objective, both constraints, penalty weights and how set | `notes/qubo.md`, `cvrp/tune.py` | in progress |
+| Derive 2.1 formal CVRP (sets, params, variables, eq vs ineq) | `notes/qubo.md` §0 | done |
+| Derive 3.1 what the register minimises | `notes/qubo.md` §5 | done |
+| Derive 4.1 variable-count table | `notes/qubo.md` §7, `cvrp/qubo.py:variable_count_table` | done (14/45/80 slack vs 4/30/60 model A vs 4/10/15 model B) |
+| A1 model: variables, objective, both constraints, penalty weights and how set | `notes/qubo.md` §1–6 (A), §9 (B); `cvrp/tune.py` | done |
 | A2 generator: seeded, assumptions, certificate + validator, ρ and d_max/Q | `cvrp/instances.py`, `notes/instances.md` | done |
-| A3 embed within 5 µm / 38 µm, report realised vs wanted couplings | `cvrp/embedding/` | todo |
-| A4 pulses, multiple instances, results | `cvrp/pulse/` | todo |
+| A3 embed within 5 µm / 38 µm, report realised vs wanted couplings | `notes/embedding-plan.md`, `cvrp/embedding/`, `results/layouts/` | done (A: negative result measured; B: map layout) |
+| A4 pulses, multiple instances, results | `notes/pulse-plan.md`, `cvrp/pulse/`, `results/runs_log.csv` | done (grid), S run; M/L running |
 | Reference C*: brute force → CPLEX → SA; S must agree | DP (proven) + brute force + CPLEX, all agree on all 9 | done |
-| Gaps: model gap, CVRP gap (Track A) | `cvrp/evaluate.py` | todo |
-| Metrics: best gap, feasibility rate, P(reach ref) with ε, atom count, embedding fidelity (formula stated), reference status | `results/results.csv` | todo |
+| Gaps: model gap, CVRP gap (Track A) | `cvrp/evaluate.py` | done |
+| Metrics: best gap, feasibility rate, P(reach ref) with ε, atom count, embedding fidelity (formula stated), reference status | `results/results.csv` columns | done |
 | Relabelings = same solution | `reference.assignment_to_groups` canonical form | done |
-| Never report an infeasible bitstring's cost | `evaluate.py` post-selection | todo |
-| DMM results labelled and compared separately | results `variant` column | todo |
-| emu-mps bond dimension reported | results `bond_dim` column | todo |
-| SA / CPLEX settings reported | `classical.simulated_annealing` returns params; CPLEX time limit logged | partly |
-| Random-sampler comparison ("how much work does the quantum part do") | `pulse/search.py` baseline | todo |
-| Repo: README one-command repro, pinned env | `README.md`, `requirements.txt` | todo |
-| Report: what did not work, where AI was used | `report/` | todo (log kept in §6 below) |
+| Never report an infeasible bitstring's cost | `evaluate.py`: only decodable, capacity-feasible shots are scored | done |
+| DMM results labelled and compared separately | `variant` column: global / dmm / random | done |
+| emu-mps bond dimension reported | `bond_dim` column (model B never needs emu-mps; model A M/L not run) | done |
+| SA / CPLEX settings reported | CPLEX time limits in code; SA helper returns its parameters (SA not needed: all references proven) | done |
+| Random-sampler comparison ("how much work does the quantum part do") | rows `B-random-*`, `A-random`, columns `*_random_K`, `p_reach_ratio_vs_random_K` | done |
+| Repo: README one-command repro, pinned env | `README.md`, `requirements.txt` | done |
+| Report: what did not work, where AI was used | §6, §6b here; `report/` | report todo (deliverable session) |
 
 ## 5. Decisions and why
 

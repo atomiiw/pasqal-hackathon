@@ -27,22 +27,25 @@ from .reference import assignment_to_groups, cluster_cost
 
 
 def assign_light(inst: Instance, seeds, dist: np.ndarray):
-    """Light decode, O(N K): non-seeds in decreasing demand (big items first, as in bin
-    packing), each to the nearest seed that still has room. None if someone does not fit."""
+    """Light decode, O(N^2 K): non-seeds in decreasing demand (big items first, as in bin
+    packing); each joins the group with room whose members are closest in total
+    (the smallest increase of the clustering cost). None if someone does not fit."""
     seeds = list(seeds)
     loads = [inst.demands[s] for s in seeds]
+    members = [[s] for s in seeds]
     a = [None] * inst.N
     for t, s in enumerate(seeds):
         a[s] = t
     rest = sorted((i for i in range(inst.N) if a[i] is None), key=lambda i: -inst.demands[i])
     for i in rest:
-        for t in np.argsort([dist[i, s] for s in seeds]):
-            if loads[t] + inst.demands[i] <= inst.Q:
-                loads[t] += inst.demands[i]
-                a[i] = int(t)
-                break
-        else:
+        cost = [sum(dist[i, j] for j in members[t]) if loads[t] + inst.demands[i] <= inst.Q else np.inf
+                for t in range(len(seeds))]
+        t = int(np.argmin(cost))
+        if not np.isfinite(cost[t]):
             return None
+        loads[t] += inst.demands[i]
+        members[t].append(i)
+        a[i] = t
     return a
 
 
