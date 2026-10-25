@@ -1,19 +1,33 @@
-<section id="loss" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<section id="loss" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
 <div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
 <p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">A</p>
-<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">Idea: write the cost directly, no slack bits</h2>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;white-space:nowrap;color:#16202B">Idea: write the cost directly, no slack bits</h2>
 </div>
-<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:48px">
-<img src="/_blob/1c3849eadd25873c809e0815a865a16d" alt="Total Loss = C cluster + lambda P capacity" style="width:1137px;height:84px;object-fit:contain">
-<div style="display:flex;flex-direction:row;gap:56px;align-items:center">
-<img src="/_blob/e62282457c354b4b55eebe954ccd4762" alt="C cluster = sum over pairs of d ij times (1 - x i - x j + 2 x i x j)" style="width:1004px;height:146px;object-fit:contain">
-<p style="font-size:32px;color:#5B6675">→ <b style="color:#16202B">optimise</b></p>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:36px">
+<img src="/_blob/ff0713cf34f8017a3e9522805e1c49ae" alt="Total Loss = C + lambda P" style="width:406px;height:47px;object-fit:contain">
+<div style="display:flex;flex-direction:row;gap:32px;align-items:center">
+<div style="flex:none;width:170px"></div>
+<div style="flex:none;width:740px"><p style="font-size:26px;font-weight:600;letter-spacing:2px;color:#5B6675">MEANING</p></div>
+<div style="flex:none;width:48px"></div>
+<div style="flex:none;width:560px"><p style="font-size:26px;font-weight:600;letter-spacing:2px;color:#2156A5">IN BITS</p></div>
 </div>
-<div style="display:flex;flex-direction:row;gap:56px;align-items:center">
-<img src="/_blob/8e6086fa4cd6dcf97083da34b74a13b2" alt="P capacity = (3 x A + 4 x B + 2 x C + 3 x D minus 6) squared" style="width:1004px;height:72px;object-fit:contain">
-<p style="font-size:32px;color:#5B6675">→ <b style="color:#16202B">pass the line</b></p>
+<div style="display:flex;flex-direction:row;gap:32px;align-items:center">
+<div style="flex:none;width:170px"><p style="font-size:34px;font-weight:600;color:#16202B">cluster</p></div>
+<div style="flex:none;width:740px;height:94px;display:flex;flex-direction:row;align-items:center"><img src="/_blob/d0c1d75edc66fdee43950a35a5e0b957" alt="C = sum over pairs of d ij times [i and j on the same truck]" style="width:498px;height:94px;object-fit:contain"></div>
+<div style="flex:none;width:48px"><p style="font-size:40px;color:#5B6675">→</p></div>
+<div style="flex:none;width:560px;height:45px"><img src="/_blob/6e3f290cfca5e026223dc749a9bb74b8" alt="[same truck] = 1 - x i - x j + 2 x i x j" style="width:560px;height:45px;object-fit:contain"></div>
 </div>
+<div style="display:flex;flex-direction:row;gap:32px;align-items:center">
+<div style="flex:none;width:170px"><p style="font-size:34px;font-weight:600;color:#16202B">capacity</p></div>
+<div style="flex:none;width:740px;height:51px;display:flex;flex-direction:row;align-items:center"><img src="/_blob/1467ab2158fc007c83675966757daf9d" alt="L1 = 3 xA + 4 xB + 2 xC + 3 xD, with 5 at most L1 at most 7" style="width:740px;height:43px;object-fit:contain"></div>
+<div style="flex:none;width:48px"><p style="font-size:40px;color:#5B6675">→</p></div>
+<div style="flex:none;width:560px;height:51px"><img src="/_blob/4f26b2e449302ea65a8574ae3cac2203" alt="P = (L1 - 6) squared" style="width:238px;height:51px;object-fit:contain"></div>
+</div>
+<table style="width:1040px;font-size:32px;color:#16202B">
+<tr><th style="width:20%">L₁</th><th style="width:16%;text-align:center">4</th><th style="width:16%;text-align:center">5</th><th style="width:16%;text-align:center">6</th><th style="width:16%;text-align:center">7</th><th style="width:16%;text-align:center">8</th></tr>
+<tr><td>P</td><td style="text-align:center;color:#A8540F">4</td><td style="text-align:center;color:#2156A5">1</td><td style="text-align:center;color:#2156A5">0</td><td style="text-align:center;color:#2156A5">1</td><td style="text-align:center;color:#A8540F">4</td></tr>
+</table>
 </div>
 <p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">4</p>
-<aside>Model A 的思路：直接把成本写成 QUBO。总 loss = cluster + λ × capacity。例子：A、B、C、D 四个客户，需求 3、4、2、3，两辆车，容量 7，bit = 1 表示 1 号车。cluster：两个客户同车时括号等于 1，加上它们的距离，要优化。capacity：系数是需求，6 是总需求的一半；合法分法得 0 或 1 分，超载至少 4 分，只要过及格线。关键是不加 slack bit，所以原子数是 4/30/60，教科书做法要 14/45/80。M/L 档一个客户一辆车一个 bit，再加每个客户恰好一辆车的惩罚。</aside>
+<aside>例子：A、B、C、D 四个客户，需求 3、4、2、3，两辆车，容量 7，bit = 1 表示 1 号车。左边是现实含义，右边是写成 0/1 变量后的样子。cluster：两个客户同车就加上它们的距离；“同车”写成 bit 就是 1 − x_i − x_j + 2x_ix_j，同为 0 或同为 1 时等于 1，否则等于 0。capacity：1 号车装 L1 = 3xA + 4xB + 2xC + 3xD，2 号车装 12 − L1，两辆都不超过 7，就等于 5 ≤ L1 ≤ 7。罚分写成 P = (L1 − 6)²，6 是这个区间的中点，也就是总需求的一半。P 是以合法区间中点为中心的抛物线：合法的装法最多得 1 分，超载至少 4 分；λ 取让得分最低的方案恰好满足容量的最小值。这样不需要任何辅助位（slack bit），所以原子数是 4/30/60，教科书做法要 14/45/80。M/L 档是一个客户一辆车一个 bit 的 one-hot，再加每个客户恰好一辆车的惩罚，形式一样。</aside>
 </section>

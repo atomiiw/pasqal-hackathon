@@ -74,6 +74,13 @@ E([(r"$\mathrm{error}=\mathrm{Pasqal\ value}-\mathrm{our\ value\ (scaled)}$", IN
 E([(r"$E\;=$", INK), (r"$-\delta\sum_i x_i$", BLUE), (r"$+$", INK),
    (r"$\sum_{i<j}\;\dfrac{C_6}{(\alpha\,d_{ij})^{6}}\,x_ix_j$", BLUE)], "eq_seed", 64)
 
+# before (meaning) -> after (bits), slide "Model A idea"
+E([(r"$C=\sum_{i<j} d_{ij}\cdot[\,i,j\ \mathrm{same\ truck}\,]$", INK)], "eqA_c_before", 40)
+E([(r"$[\,\mathrm{same\ truck}\,]=1-x_i-x_j+2x_ix_j$", BLUE)], "eqA_c_after", 40)
+E([(r"$L_1=3x_A+4x_B+2x_C+3x_D,\quad 5\leq L_1\leq 7$", INK)], "eqA_p_before", 40)
+E([(r"$P=(L_1-6)^2$", BLUE)], "eqA_p_after", 40)
+E([(r"$\mathrm{Total\ Loss}=C+\lambda\,P$", INK)], "eqA_total", 44)
+
 # ---------------------------------------------------------------- data
 insts = {t: Instance.load(ROOT / f"instances/{t}_seed0.json") for t in "SML"}
 weights = json.loads((ROOT / "instances/weights.json").read_text())
