@@ -189,82 +189,123 @@
   0.30606235236129903,
   2.211707966322987
  ],
- "brute_force_light": {
-  "n_seed_sets": 120,
-  "n_feasible": 120,
-  "n_optimal_seed_sets": 10,
-  "model_optimum": 329.20668691424845,
-  "model_groups": [
-   [
-    0,
+ "brute_force": {
+  "light": {
+   "n_seed_sets": 120,
+   "n_feasible": 120,
+   "n_optimal_seed_sets": 10,
+   "model_optimum": 329.20668691424845,
+   "model_groups": [
+    [
+     0,
+     1,
+     5,
+     8
+    ],
+    [
+     2,
+     4,
+     7
+    ],
+    [
+     3,
+     6,
+     9
+    ]
+   ],
+   "model_seeds": [
     1,
-    5,
-    8
-   ],
-   [
     2,
-    4,
-    7
+    3
    ],
-   [
-    3,
-    6,
-    9
-   ]
-  ],
-  "model_seeds": [
-   1,
-   2,
-   3
-  ],
-  "decoder": "light",
-  "rank_of_model_optimum": 69,
-  "hardware_ground_state_seeds": [
-   0,
-   7,
-   9
-  ],
-  "hardware_ground_state_feasible": true,
-  "hardware_ground_state_cost": 476.30254562516495,
-  "ground_state_has_K_seeds": true
- },
- "brute_force_exact": {
-  "n_seed_sets": 120,
-  "n_feasible": 120,
-  "n_optimal_seed_sets": 36,
-  "model_optimum": 329.20668691424845,
-  "model_groups": [
-   [
+   "decoder": "light",
+   "rank_of_model_optimum": 69,
+   "hardware_ground_state_seeds": [
     0,
-    1,
-    5,
-    8
-   ],
-   [
-    2,
-    4,
-    7
-   ],
-   [
-    3,
-    6,
+    7,
     9
-   ]
-  ],
-  "model_seeds": [
-   0,
-   2,
-   3
-  ],
-  "decoder": "exact",
-  "rank_of_model_optimum": 17,
-  "hardware_ground_state_seeds": [
-   0,
-   7,
-   9
-  ],
-  "hardware_ground_state_feasible": true,
-  "hardware_ground_state_cost": 329.20668691424845,
-  "ground_state_has_K_seeds": true
+   ],
+   "hardware_ground_state_feasible": true,
+   "hardware_ground_state_cost": 476.30254562516495,
+   "ground_state_has_K_seeds": true
+  },
+  "light-multi": {
+   "n_seed_sets": 120,
+   "n_feasible": 120,
+   "n_optimal_seed_sets": 20,
+   "model_optimum": 329.20668691424845,
+   "model_groups": [
+    [
+     0,
+     1,
+     5,
+     8
+    ],
+    [
+     2,
+     4,
+     7
+    ],
+    [
+     3,
+     6,
+     9
+    ]
+   ],
+   "model_seeds": [
+    0,
+    2,
+    6
+   ],
+   "decoder": "light-multi",
+   "rank_of_model_optimum": 14,
+   "hardware_ground_state_seeds": [
+    0,
+    7,
+    9
+   ],
+   "hardware_ground_state_feasible": true,
+   "hardware_ground_state_cost": 329.20668691424845,
+   "ground_state_has_K_seeds": true
+  },
+  "exact": {
+   "n_seed_sets": 120,
+   "n_feasible": 120,
+   "n_optimal_seed_sets": 36,
+   "model_optimum": 329.20668691424845,
+   "model_groups": [
+    [
+     0,
+     1,
+     5,
+     8
+    ],
+    [
+     2,
+     4,
+     7
+    ],
+    [
+     3,
+     6,
+     9
+    ]
+   ],
+   "model_seeds": [
+    0,
+    2,
+    3
+   ],
+   "decoder": "exact",
+   "rank_of_model_optimum": 17,
+   "hardware_ground_state_seeds": [
+    0,
+    7,
+    9
+   ],
+   "hardware_ground_state_feasible": true,
+   "hardware_ground_state_cost": 329.20668691424845,
+   "ground_state_has_K_seeds": true
+  }
  }
 }

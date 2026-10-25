@@ -349,100 +349,150 @@
   0.6149507908922172,
   3.1678088787687835
  ],
- "brute_force_light": {
-  "n_seed_sets": 1365,
-  "n_feasible": 1365,
-  "n_optimal_seed_sets": 2,
-  "model_optimum": 475.3612606668783,
-  "model_groups": [
-   [
-    0,
-    6,
-    12,
-    13
+ "brute_force": {
+  "light": {
+   "n_seed_sets": 1365,
+   "n_feasible": 1365,
+   "n_optimal_seed_sets": 2,
+   "model_optimum": 475.3612606668783,
+   "model_groups": [
+    [
+     0,
+     6,
+     12,
+     13
+    ],
+    [
+     1,
+     9,
+     11
+    ],
+    [
+     2,
+     4,
+     7
+    ],
+    [
+     3,
+     5,
+     8,
+     10,
+     14
+    ]
    ],
-   [
+   "model_seeds": [
     1,
-    9,
-    11
-   ],
-   [
-    2,
     4,
-    7
-   ],
-   [
-    3,
     5,
-    8,
-    10,
-    14
-   ]
-  ],
-  "model_seeds": [
-   1,
-   4,
-   5,
-   12
-  ],
-  "decoder": "light",
-  "rank_of_model_optimum": 31,
-  "hardware_ground_state_seeds": [
-   1,
-   2,
-   5,
-   6
-  ],
-  "hardware_ground_state_feasible": true,
-  "hardware_ground_state_cost": 562.0507314582208,
-  "ground_state_has_K_seeds": true
- },
- "brute_force_exact": {
-  "n_seed_sets": 1365,
-  "n_feasible": 1365,
-  "n_optimal_seed_sets": 180,
-  "model_optimum": 475.3612606668783,
-  "model_groups": [
-   [
-    0,
-    6,
-    12,
-    13
+    12
    ],
-   [
+   "decoder": "light",
+   "rank_of_model_optimum": 31,
+   "hardware_ground_state_seeds": [
     1,
-    9,
-    11
-   ],
-   [
     2,
-    4,
-    7
-   ],
-   [
-    3,
     5,
-    8,
-    10,
-    14
-   ]
-  ],
-  "model_seeds": [
-   0,
-   1,
-   2,
-   3
-  ],
-  "decoder": "exact",
-  "rank_of_model_optimum": 260,
-  "hardware_ground_state_seeds": [
-   1,
-   2,
-   5,
-   6
-  ],
-  "hardware_ground_state_feasible": true,
-  "hardware_ground_state_cost": 475.3612606668783,
-  "ground_state_has_K_seeds": true
+    6
+   ],
+   "hardware_ground_state_feasible": true,
+   "hardware_ground_state_cost": 562.0507314582208,
+   "ground_state_has_K_seeds": true
+  },
+  "light-multi": {
+   "n_seed_sets": 1365,
+   "n_feasible": 1365,
+   "n_optimal_seed_sets": 53,
+   "model_optimum": 475.3612606668783,
+   "model_groups": [
+    [
+     0,
+     6,
+     12,
+     13
+    ],
+    [
+     1,
+     9,
+     11
+    ],
+    [
+     2,
+     4,
+     7
+    ],
+    [
+     3,
+     5,
+     8,
+     10,
+     14
+    ]
+   ],
+   "model_seeds": [
+    0,
+    1,
+    2,
+    5
+   ],
+   "decoder": "light-multi",
+   "rank_of_model_optimum": 4,
+   "hardware_ground_state_seeds": [
+    1,
+    2,
+    5,
+    6
+   ],
+   "hardware_ground_state_feasible": true,
+   "hardware_ground_state_cost": 475.3612606668783,
+   "ground_state_has_K_seeds": true
+  },
+  "exact": {
+   "n_seed_sets": 1365,
+   "n_feasible": 1365,
+   "n_optimal_seed_sets": 180,
+   "model_optimum": 475.3612606668783,
+   "model_groups": [
+    [
+     0,
+     6,
+     12,
+     13
+    ],
+    [
+     1,
+     9,
+     11
+    ],
+    [
+     2,
+     4,
+     7
+    ],
+    [
+     3,
+     5,
+     8,
+     10,
+     14
+    ]
+   ],
+   "model_seeds": [
+    0,
+    1,
+    2,
+    3
+   ],
+   "decoder": "exact",
+   "rank_of_model_optimum": 260,
+   "hardware_ground_state_seeds": [
+    1,
+    2,
+    5,
+    6
+   ],
+   "hardware_ground_state_feasible": true,
+   "hardware_ground_state_cost": 475.3612606668783,
+   "ground_state_has_K_seeds": true
+  }
  }
 }

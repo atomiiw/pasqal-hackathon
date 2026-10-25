@@ -34,7 +34,8 @@ def layouts_figure(insts):
         for t, g in enumerate(groups):
             for i in g:
                 col[i] = [BLUE, ORANGE, AQUA, YELLOW][t % 4]
-        seeds = L["brute_force_light"]["model_seeds"]
+        bf = L.get("brute_force", {}).get("light") or L.get("brute_force_light")
+        seeds = bf["model_seeds"]
         for i, (x, y) in enumerate(X):
             ax.add_patch(plt.Circle((x, y), Rb / 2, fill=False, ls=":", color=GRID, lw=0.8))
             ax.scatter(x, y, s=110 if i in seeds else 45, color=col.get(i, INK2), zorder=5,
@@ -42,29 +43,31 @@ def layouts_figure(insts):
             ax.annotate(chr(65 + i), (x, y), xytext=(4, 4), textcoords="offset points", fontsize=8)
         ax.set_aspect("equal")
         ax.set_title(f"{inst.name}: {len(X)} atoms, alpha={L['alpha']:.2f} um/unit, Rb={Rb} um, eta={L['fidelity']['eta']:.2f}",
-                     loc="left", fontsize=8.5)
+                     loc="left", fontsize=8)
         ax.grid(color=GRID, lw=0.5)
         ax.set_xlabel("um")
-    fig.suptitle("Model B layouts: atoms on the scaled customer map. Colour = optimal cluster; bold ring = an optimal seed set; "
+    fig.suptitle("Model B layouts: atoms on the scaled customer map. Colour = optimal cluster; bold ring = an optimal seed set;\n"
                  "dotted circles of radius Rb/2 overlap when two customers cannot both be seeds", fontsize=9)
-    fig.tight_layout()
+    fig.tight_layout(rect=(0, 0, 1, 0.97))
     fig.savefig(FIG / "layouts_B.png", dpi=120)
 
 
 def results_figure(df):
-    sel = df[df.method.isin(["B-seeds-light", "B-seeds-exact", "A-direct-global", "A-direct-dmm"])].copy()
+    sel = df[df.method.isin(["B-seeds-light", "B-seeds-light-multi", "B-seeds-exact", "A-direct-global", "A-direct-dmm"])].copy()
     sel = sel[sel.feasibility_rate.notna()]
     inst_order = [f"{t}_seed{s}" for t in "SML" for s in range(3)]
-    fig, axs = plt.subplots(1, 2, figsize=(13, 4.6))
-    methods = [("B-seeds-light", BLUE), ("B-seeds-exact", AQUA), ("A-direct-global", ORANGE), ("A-direct-dmm", YELLOW)]
+    fig, axs = plt.subplots(1, 2, figsize=(13, 5))
+    methods = [("B-seeds-light", BLUE), ("B-seeds-light-multi", "#6250d6"), ("B-seeds-exact", AQUA),
+               ("A-direct-global", ORANGE), ("A-direct-dmm", YELLOW)]
+    methods = [m for m in methods if m[0] in set(sel.method)]
     for ax, metric, title in [(axs[0], "feasibility_rate", "Feasibility rate (share of shots that decode to a valid plan)"),
                               (axs[1], "p_reach_ref", "P(reach the proven optimum)")]:
         x = np.arange(len(inst_order))
-        w = 0.2
+        w = 0.8 / len(methods)
         for k, (m, c) in enumerate(methods):
             vals = [sel[(sel.instance == i) & (sel.method == m)][metric].max() for i in inst_order]
             vals = [v if pd.notna(v) else 0 for v in vals]
-            ax.bar(x + (k - 1.5) * w, vals, w, color=c, label=m, zorder=3, edgecolor=SURF)
+            ax.bar(x + (k - (len(methods) - 1) / 2) * w, vals, w, color=c, label=m, zorder=3, edgecolor=SURF)
         # fair baseline for B: uniform over K-subsets
         base = [sel[(sel.instance == i) & (sel.method == "B-seeds-light")]["p_reach_random_K" if metric == "p_reach_ref" else "feas_random_K"].max() for i in inst_order]
         ax.scatter(x, [b if pd.notna(b) else 0 for b in base], marker="_", s=300, color=INK, zorder=4,
@@ -76,19 +79,25 @@ def results_figure(df):
         ax.set_axisbelow(True)
         for s in ("top", "right"):
             ax.spines[s].set_visible(False)
-    axs[0].legend(frameon=False, fontsize=8, loc="upper right")
-    fig.tight_layout()
+    handles, labels_ = axs[0].get_legend_handles_labels()
+    fig.legend(handles, labels_, frameon=False, fontsize=8, loc="lower center", ncol=5, bbox_to_anchor=(0.5, -0.02))
+    fig.tight_layout(rect=(0, 0.06, 1, 1))
     fig.savefig(FIG / "results_summary.png", dpi=130)
 
 
 def summary_md(df):
     cols = ["instance", "method", "atoms", "feasibility_rate", "feas_random_K", "p_reach_ref", "p_reach_random_K",
-            "p_reach_ratio_vs_random_K", "model_best_gap", "cvrp_best_gap", "eta", "gs_rank", "emulator", "notes"]
-    d = df[df.method.isin(["B-seeds-light", "B-seeds-exact", "B-random-light", "A-direct-global", "A-direct-dmm",
-                           "A-random", "A-qubosolver-default"])][cols].copy()
-    for c in ["feasibility_rate", "feas_random_K", "p_reach_ref", "p_reach_random_K"]:
-        d[c] = d[c].map(lambda v: f"{100*v:.1f}%" if pd.notna(v) else "")
-    d["p_reach_ratio_vs_random_K"] = d["p_reach_ratio_vs_random_K"].map(lambda v: f"{v:.1f}x" if pd.notna(v) else "")
+            "p_reach_ratio_vs_random_K", "p_reach_given_feasible", "conditional_ratio_vs_random_K",
+            "model_best_gap", "cvrp_best_gap", "eta", "gs_rank", "emulator", "notes"]
+    cols = [c for c in cols if c in df.columns]
+    d = df[df.method.isin(["B-seeds-light", "B-seeds-light-multi", "B-seeds-exact", "B-random-light",
+                           "A-direct-global", "A-direct-dmm", "A-random", "A-qubosolver-default"])][cols].copy()
+    for c in ["feasibility_rate", "feas_random_K", "p_reach_ref", "p_reach_random_K", "p_reach_given_feasible"]:
+        if c in d:
+            d[c] = d[c].map(lambda v: f"{100*v:.1f}%" if pd.notna(v) else "")
+    for c in ["p_reach_ratio_vs_random_K", "conditional_ratio_vs_random_K"]:
+        if c in d:
+            d[c] = d[c].map(lambda v: f"{v:.1f}x" if pd.notna(v) else "")
     for c in ["model_best_gap", "cvrp_best_gap"]:
         d[c] = d[c].map(lambda v: f"{v:.1f}%" if pd.notna(v) else "undefined")
     d["eta"] = d["eta"].map(lambda v: f"{v:.2f}" if pd.notna(v) else "")

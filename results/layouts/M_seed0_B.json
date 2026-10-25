@@ -189,82 +189,123 @@
   0.2956503255291667,
   1.1158429546469502
  ],
- "brute_force_light": {
-  "n_seed_sets": 120,
-  "n_feasible": 115,
-  "n_optimal_seed_sets": 12,
-  "model_optimum": 353.03801659852115,
-  "model_groups": [
-   [
-    0,
-    6,
-    9
+ "brute_force": {
+  "light": {
+   "n_seed_sets": 120,
+   "n_feasible": 115,
+   "n_optimal_seed_sets": 12,
+   "model_optimum": 353.03801659852115,
+   "model_groups": [
+    [
+     0,
+     6,
+     9
+    ],
+    [
+     1,
+     2,
+     5,
+     7
+    ],
+    [
+     3,
+     4,
+     8
+    ]
    ],
-   [
+   "model_seeds": [
+    0,
     1,
-    2,
-    5,
+    8
+   ],
+   "decoder": "light",
+   "rank_of_model_optimum": 78,
+   "hardware_ground_state_seeds": [
+    0,
+    3,
     7
    ],
-   [
-    3,
-    4,
-    8
-   ]
-  ],
-  "model_seeds": [
-   0,
-   1,
-   8
-  ],
-  "decoder": "light",
-  "rank_of_model_optimum": 78,
-  "hardware_ground_state_seeds": [
-   0,
-   3,
-   7
-  ],
-  "hardware_ground_state_feasible": true,
-  "hardware_ground_state_cost": 535.0547229736101,
-  "ground_state_has_K_seeds": true
- },
- "brute_force_exact": {
-  "n_seed_sets": 120,
-  "n_feasible": 120,
-  "n_optimal_seed_sets": 36,
-  "model_optimum": 353.03801659852115,
-  "model_groups": [
-   [
-    0,
-    6,
-    9
+   "hardware_ground_state_feasible": true,
+   "hardware_ground_state_cost": 535.0547229736101,
+   "ground_state_has_K_seeds": true
+  },
+  "light-multi": {
+   "n_seed_sets": 120,
+   "n_feasible": 118,
+   "n_optimal_seed_sets": 36,
+   "model_optimum": 353.03801659852115,
+   "model_groups": [
+    [
+     0,
+     6,
+     9
+    ],
+    [
+     1,
+     2,
+     5,
+     7
+    ],
+    [
+     3,
+     4,
+     8
+    ]
    ],
-   [
+   "model_seeds": [
+    0,
     1,
-    2,
-    5,
+    3
+   ],
+   "decoder": "light-multi",
+   "rank_of_model_optimum": 37,
+   "hardware_ground_state_seeds": [
+    0,
+    3,
     7
    ],
-   [
+   "hardware_ground_state_feasible": true,
+   "hardware_ground_state_cost": 353.03801659852115,
+   "ground_state_has_K_seeds": true
+  },
+  "exact": {
+   "n_seed_sets": 120,
+   "n_feasible": 120,
+   "n_optimal_seed_sets": 36,
+   "model_optimum": 353.03801659852115,
+   "model_groups": [
+    [
+     0,
+     6,
+     9
+    ],
+    [
+     1,
+     2,
+     5,
+     7
+    ],
+    [
+     3,
+     4,
+     8
+    ]
+   ],
+   "model_seeds": [
+    0,
+    1,
+    3
+   ],
+   "decoder": "exact",
+   "rank_of_model_optimum": 37,
+   "hardware_ground_state_seeds": [
+    0,
     3,
-    4,
-    8
-   ]
-  ],
-  "model_seeds": [
-   0,
-   1,
-   3
-  ],
-  "decoder": "exact",
-  "rank_of_model_optimum": 37,
-  "hardware_ground_state_seeds": [
-   0,
-   3,
-   7
-  ],
-  "hardware_ground_state_feasible": true,
-  "hardware_ground_state_cost": 353.03801659852115,
-  "ground_state_has_K_seeds": true
+    7
+   ],
+   "hardware_ground_state_feasible": true,
+   "hardware_ground_state_cost": 353.03801659852115,
+   "ground_state_has_K_seeds": true
+  }
  }
 }

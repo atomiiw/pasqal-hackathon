@@ -63,62 +63,93 @@
   0.7343197975733428,
   30.184064088753058
  ],
- "brute_force_light": {
-  "n_seed_sets": 6,
-  "n_feasible": 6,
-  "n_optimal_seed_sets": 2,
-  "model_optimum": 155.42599058230815,
-  "model_groups": [
-   [
-    0,
-    3
+ "brute_force": {
+  "light": {
+   "n_seed_sets": 6,
+   "n_feasible": 6,
+   "n_optimal_seed_sets": 2,
+   "model_optimum": 155.42599058230815,
+   "model_groups": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     2
+    ]
    ],
-   [
-    1,
-    2
-   ]
-  ],
-  "model_seeds": [
-   0,
-   1
-  ],
-  "decoder": "light",
-  "rank_of_model_optimum": 5,
-  "hardware_ground_state_seeds": [
-   0,
-   2
-  ],
-  "hardware_ground_state_feasible": true,
-  "hardware_ground_state_cost": 160.40348216423143,
-  "ground_state_has_K_seeds": true
- },
- "brute_force_exact": {
-  "n_seed_sets": 6,
-  "n_feasible": 6,
-  "n_optimal_seed_sets": 4,
-  "model_optimum": 155.42599058230815,
-  "model_groups": [
-   [
+   "model_seeds": [
     0,
-    3
+    1
    ],
-   [
-    1,
+   "decoder": "light",
+   "rank_of_model_optimum": 5,
+   "hardware_ground_state_seeds": [
+    0,
     2
-   ]
-  ],
-  "model_seeds": [
-   0,
-   1
-  ],
-  "decoder": "exact",
-  "rank_of_model_optimum": 5,
-  "hardware_ground_state_seeds": [
-   0,
-   2
-  ],
-  "hardware_ground_state_feasible": true,
-  "hardware_ground_state_cost": 155.42599058230815,
-  "ground_state_has_K_seeds": true
+   ],
+   "hardware_ground_state_feasible": true,
+   "hardware_ground_state_cost": 160.40348216423143,
+   "ground_state_has_K_seeds": true
+  },
+  "light-multi": {
+   "n_seed_sets": 6,
+   "n_feasible": 6,
+   "n_optimal_seed_sets": 4,
+   "model_optimum": 155.42599058230815,
+   "model_groups": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "model_seeds": [
+    0,
+    1
+   ],
+   "decoder": "light-multi",
+   "rank_of_model_optimum": 5,
+   "hardware_ground_state_seeds": [
+    0,
+    2
+   ],
+   "hardware_ground_state_feasible": true,
+   "hardware_ground_state_cost": 155.42599058230815,
+   "ground_state_has_K_seeds": true
+  },
+  "exact": {
+   "n_seed_sets": 6,
+   "n_feasible": 6,
+   "n_optimal_seed_sets": 4,
+   "model_optimum": 155.42599058230815,
+   "model_groups": [
+    [
+     0,
+     3
+    ],
+    [
+     1,
+     2
+    ]
+   ],
+   "model_seeds": [
+    0,
+    1
+   ],
+   "decoder": "exact",
+   "rank_of_model_optimum": 5,
+   "hardware_ground_state_seeds": [
+    0,
+    2
+   ],
+   "hardware_ground_state_feasible": true,
+   "hardware_ground_state_cost": 155.42599058230815,
+   "ground_state_has_K_seeds": true
+  }
  }
 }
