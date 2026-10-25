@@ -34,10 +34,12 @@ from .tune import WEIGHTS_FILE, tune
 warnings.filterwarnings("ignore")
 RESULTS = ROOT / "results"
 LAYOUTS = RESULTS / "layouts"
+SHOTS = RESULTS / "shots"
 COLUMNS = ["instance", "tier", "seed", "model", "method", "variant", "decoder", "atoms", "lam", "A", "alpha", "r_c",
            "eta", "gs_rank", "gs_preserved", "omega_max", "duration", "delta_0", "delta_f", "Rb", "emulator",
            "bond_dim", "shots", "feasibility_rate", "p_reach_ref", "feas_random_K", "p_reach_random_K",
-           "p_reach_ratio_vs_random_K", "eps", "model_best_gap", "cvrp_best_gap",
+           "p_reach_ratio_vs_random_K", "p_reach_given_feasible", "p_reach_given_feasible_random_K",
+           "conditional_ratio_vs_random_K", "eps", "model_best_gap", "cvrp_best_gap",
            "best_groups", "model_optimum", "cvrp_optimum", "reference_status", "selected_by", "notes"]
 
 
@@ -103,18 +105,17 @@ def run_model_b(insts, shots, log, out, verbose=True):
             print(f"  [B tier {tier}] selected Rb={Rb} T={T}")
         # --- per instance: delta_f multiplier; both decoders evaluated on the same shots
         for inst in group:
-            sm_light = SeedModel(inst, blockade_radius=Rb, decoder="light")
-            sm_exact = SeedModel(inst, blockade_radius=Rb, decoder="exact")
+            models = {d: SeedModel(inst, blockade_radius=Rb, decoder=d) for d in ("light", "light-multi", "exact")}
+            sm_light = models["light"]
             X, linfo = sm_light.layout()
             validate_layout(X, sm_light.labels)
             f = fidelity(X, sm_light.target_U)
             delta_nom = sm_light.delta_nominal(X)
-            bf_l = sm_light.brute_force(X, delta_nom)
-            bf_e = sm_exact.brute_force(X, delta_nom)
+            bfs = {d: m.brute_force(X, delta_nom) for d, m in models.items()}
             (LAYOUTS / f"{inst.name}_B.json").write_text(json.dumps(dict(
                 coords=X.tolist(), labels=sm_light.labels, alpha=sm_light.alpha, r_c=sm_light.r_c, Rb=Rb,
                 target_U=sm_light.target_U.tolist(), fidelity=f, delta_window=sm_light.delta_window(X),
-                brute_force_light=bf_l, brute_force_exact=bf_e), indent=1))
+                brute_force={d: bf for d, bf in bfs.items()}), indent=1))
             best = None
             for c in INSTANCE_GRID["c"]:
                 p = seed_params(sm_light, X, Rb, T, c)
@@ -131,32 +132,42 @@ def run_model_b(insts, shots, log, out, verbose=True):
                           omega_max=best["omega_max"], duration=best["duration"], delta_0=best["delta_0"],
                           delta_f=best["delta_f"], emulator=best["emulator"], bond_dim=best["bond_dim"], shots=best["shots"],
                           selected_by="P(reach), then best gap, then feasibility; Rb,T on seed 0; c per instance")
+            SHOTS.mkdir(exist_ok=True)
+            (SHOTS / f"{inst.name}_B.json").write_text(json.dumps(dict(
+                params={k: best[k] for k in ("omega_max", "duration", "delta_0", "delta_f")}, Rb=Rb,
+                counts=best["counts"]), indent=0))
+
             def k_uniform(bf):
                 """Fair baseline: a sampler uniform over exactly-K seed sets, same decode (analytic)."""
-                opt = sum(1 for _ in [0]) and bf["n_optimal_seed_sets"]  # seed sets decoding to the optimum
-                return dict(feas_random_K=bf["n_feasible"] / bf["n_seed_sets"], p_reach_random_K=opt / bf["n_seed_sets"])
+                n, nf, no = bf["n_seed_sets"], bf["n_feasible"], bf["n_optimal_seed_sets"]
+                return dict(feas_random_K=nf / n, p_reach_random_K=no / n,
+                            p_reach_given_feasible_random_K=(no / nf) if nf else None)
 
-            kl, ke = k_uniform(bf_l), k_uniform(bf_e)
-            gs_ok = lambda bf: bool(bf["hardware_ground_state_feasible"] and bf["hardware_ground_state_cost"] is not None  # noqa: E731
-                                    and abs(bf["hardware_ground_state_cost"] - inst.references["model_optimum"]) < 1e-6)
-            out.append(base_row(inst, "B-seeds", "B-seeds-light", variant="global", decoder="light",
-                                gs_rank=bf_l["rank_of_model_optimum"], gs_preserved=gs_ok(bf_l),
-                                feasibility_rate=best["feasibility_rate"], p_reach_ref=best["p_reach_ref"],
-                                p_reach_ratio_vs_random_K=(best["p_reach_ref"] / kl["p_reach_random_K"]) if kl["p_reach_random_K"] else None,
-                                model_best_gap=best["model_best_gap"], cvrp_best_gap=best["cvrp_best_gap"],
-                                best_groups=best["best_groups"],
-                                notes=f"seed-model optimum (light decode) {bf_l['model_optimum']:.2f}; {bf_l['n_optimal_seed_sets']} of {bf_l['n_seed_sets']} seed sets decode to the optimum",
-                                **common, **kl))
-            ev_e = evaluate_shots(inst, sm_exact, best["counts"])
-            out.append(base_row(inst, "B-seeds", "B-seeds-exact", variant="global", decoder="exact",
-                                gs_rank=bf_e["rank_of_model_optimum"], gs_preserved=gs_ok(bf_e),
-                                feasibility_rate=ev_e["feasibility_rate"], p_reach_ref=ev_e["p_reach_ref"],
-                                p_reach_ratio_vs_random_K=(ev_e["p_reach_ref"] / ke["p_reach_random_K"]) if ke["p_reach_random_K"] else None,
-                                model_best_gap=ev_e["model_best_gap"], cvrp_best_gap=ev_e["cvrp_best_gap"],
-                                best_groups=ev_e["best_groups"],
-                                notes=f"same shots as light row; exact decode = best feasible assignment to the seeds (classical post-processing); {bf_e['n_optimal_seed_sets']} of {bf_e['n_seed_sets']} seed sets decode to the optimum",
-                                **common, **ke))
-            for dec, sm in (("light", sm_light), ("exact", sm_exact)):
+            def gs_ok(bf):
+                return bool(bf["hardware_ground_state_feasible"] and bf["hardware_ground_state_cost"] is not None
+                            and abs(bf["hardware_ground_state_cost"] - inst.references["model_optimum"]) < 1e-6)
+
+            labels = {"light": "headline: light decode, O(N^2 K)",
+                      "light-multi": "light decode under 3 fixed item orders, best kept (classical-light, O(3 N^2 K))",
+                      "exact": "exact decode = best feasible assignment to the seeds (classical post-processing, GAP)"}
+            for dec, sm in models.items():
+                ev = best if dec == "light" else evaluate_shots(inst, sm, best["counts"])
+                bf = bfs[dec]
+                ku = k_uniform(bf)
+                cond = (ev["p_reach_ref"] / ev["feasibility_rate"]) if ev["feasibility_rate"] else None
+                out.append(base_row(inst, "B-seeds", f"B-seeds-{dec}", variant="global", decoder=dec,
+                                    gs_rank=bf["rank_of_model_optimum"], gs_preserved=gs_ok(bf),
+                                    feasibility_rate=ev["feasibility_rate"], p_reach_ref=ev["p_reach_ref"],
+                                    p_reach_ratio_vs_random_K=(ev["p_reach_ref"] / ku["p_reach_random_K"]) if ku["p_reach_random_K"] else None,
+                                    p_reach_given_feasible=cond,
+                                    conditional_ratio_vs_random_K=(cond / ku["p_reach_given_feasible_random_K"])
+                                    if (cond is not None and ku["p_reach_given_feasible_random_K"]) else None,
+                                    model_best_gap=ev["model_best_gap"], cvrp_best_gap=ev["cvrp_best_gap"],
+                                    best_groups=ev["best_groups"],
+                                    notes=f"{labels[dec]}; same shots for all decoders; seed-model optimum {bf['model_optimum']:.2f}; "
+                                          f"{bf['n_optimal_seed_sets']} of {bf['n_seed_sets']} seed sets decode to the optimum",
+                                    **common, **ku))
+            for dec, sm in models.items():
                 rr = random_row(inst, sm, shots)
                 out.append(base_row(inst, "B-seeds", f"B-random-{dec}", variant="random", decoder=dec, atoms=inst.N,
                                     emulator=rr["emulator"], shots=shots, feasibility_rate=rr["feasibility_rate"],
@@ -279,6 +290,9 @@ def main():
         run_model_a(insts, weights, args.shots, log, out)
     suffix = "" if args.all else f"_{args.tier}"
     df = pd.DataFrame(out).reindex(columns=COLUMNS)
+    if args.skip_a and (RESULTS / f"results{suffix}.csv").exists():
+        old = pd.read_csv(RESULTS / f"results{suffix}.csv")
+        df = pd.concat([df, old[old.model == "A-direct"]], ignore_index=True).reindex(columns=COLUMNS)
     df.to_csv(RESULTS / f"results{suffix}.csv", index=False)
     pd.DataFrame(log).to_csv(RESULTS / f"runs_log{suffix}.csv", index=False)
     print(df[["instance", "method", "atoms", "feasibility_rate", "p_reach_ref", "model_best_gap", "cvrp_best_gap", "eta", "gs_rank"]].to_string())

@@ -20,12 +20,13 @@ from .sequence import PulseParams, build_sequence
 
 TIER_GRID_B = dict(Rb=(7.0, 9.0, 12.0), T=(2000, 4000, 6000))
 TIER_GRID_A = dict(omega_frac=(0.25, 0.5, 1.0), T=(2000, 4000, 6000))
-INSTANCE_GRID = dict(c=(0.7, 1.0, 1.3))
+INSTANCE_GRID = dict(c=(0.7, 1.0, 1.3, 1.6, 1.9))
 
 
 def score_key(ev: dict):
+    """P(reach) first, then feasibility, then best gap (gap is almost always 0 at these sizes)."""
     gap = ev["model_best_gap"]
-    return (-ev["p_reach_ref"], np.inf if gap is None else gap, -ev["feasibility_rate"])
+    return (-round(ev["p_reach_ref"], 2), -ev["feasibility_rate"], np.inf if gap is None else gap)
 
 
 def run_point(inst, model, coords, params: PulseParams, shots: int, bond_dim: int = 64) -> dict:

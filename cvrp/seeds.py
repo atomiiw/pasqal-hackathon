@@ -107,7 +107,40 @@ def assign_exact(inst: Instance, seeds, dist: np.ndarray):
     return a
 
 
-DECODERS = {"light": assign_light, "exact": assign_exact}
+def assign_light_multi(inst: Instance, seeds, dist: np.ndarray):
+    """Light decode under 3 fixed item orders (demand desc, demand asc, distance to nearest
+    seed asc); keep the cheapest feasible result. Still O(3 N^2 K)."""
+    seeds = list(seeds)
+    rest = [i for i in range(inst.N) if i not in seeds]
+    orders = [sorted(rest, key=lambda i: -inst.demands[i]),
+              sorted(rest, key=lambda i: inst.demands[i]),
+              sorted(rest, key=lambda i: min(dist[i, s] for s in seeds))]
+    best, best_a = np.inf, None
+    for order in orders:
+        loads = [inst.demands[s] for s in seeds]
+        members = [[s] for s in seeds]
+        a = [None] * inst.N
+        for t, s in enumerate(seeds):
+            a[s] = t
+        ok = True
+        for i in order:
+            cost = [sum(dist[i, j] for j in members[t]) if loads[t] + inst.demands[i] <= inst.Q else np.inf
+                    for t in range(len(seeds))]
+            t = int(np.argmin(cost))
+            if not np.isfinite(cost[t]):
+                ok = False
+                break
+            loads[t] += inst.demands[i]
+            members[t].append(i)
+            a[i] = t
+        if ok:
+            c = cluster_cost(a, dist)
+            if c < best:
+                best, best_a = c, a
+    return best_a
+
+
+DECODERS = {"light": assign_light, "light-multi": assign_light_multi, "exact": assign_exact}
 
 
 def dispersion_radius(dist: np.ndarray, K: int) -> float:
