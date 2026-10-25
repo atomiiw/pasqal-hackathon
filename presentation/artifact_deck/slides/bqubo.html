@@ -1,0 +1,17 @@
+<section id="bqubo" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">B</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">QUBO = machine energy</h2>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:56px">
+<img src="/_blob/b43ca977b86c5bdb536f570105b0d0ed" alt="E = minus delta times sum of x i + sum of C6 over (alpha d ij) to the sixth x i x j" style="width:930px;height:168px;object-fit:contain">
+<table style="width:1500px;font-size:32px;color:#16202B">
+<tr><th style="width:18%">term</th><th style="width:28%">model B wants</th><th style="width:30%">Pasqal gives</th><th style="width:24%">match?</th></tr>
+<tr><td>per bit</td><td>the same −δ for all</td><td>−δ, the same for all</td><td style="color:#2156A5">yes</td></tr>
+<tr><td>per pair</td><td>C₆ / (α d)⁶</td><td>C₆ / r⁶ with r = α d</td><td style="color:#2156A5">yes, by layout</td></tr>
+<tr><td>capacity</td><td>not in the energy</td><td>—</td><td>checked after</td></tr>
+</table>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">10</p>
+<aside>Model B 的 QUBO 本身就是机器的能量，不需要翻译。每个原子前面都是同一个 −δ，正好就是激光给的全局 detuning；每对原子前面是 C6/(α·d)⁶，d 是客户距离，α 是比例，只要把原子按客户地图乘 α 摆，机器的耦合就是这个值。和 Model A 那张表对比：A 的每个 bit 系数对不上，这里对上了；A 的原子对摆不出来，这里按地图摆就行。容量不在能量里，在解码时检查。实测还有误差（η 0.1 到 0.9），因为太近的客户要抬到 5 µm 以上，但它们本来就互相阻塞，不影响结果。</aside>
+</section>

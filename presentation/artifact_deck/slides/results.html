@@ -1,6 +1,7 @@
 <section id="results" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
-<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">Results</h2>
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">B</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">Result</h2>
 <p style="font-size:32px;color:#5B6675">share of 1000 answers that are the best answer</p>
 </div>
 <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:40px">
@@ -13,6 +14,6 @@
 <p style="font-size:32px;line-height:1.4;color:#16202B">vs random 0/1: <b>2–4× · 7–12× · 60–160×</b>     vs random K seeds: <b>about even on S, M · up to 8× on L</b></p>
 <p style="font-size:24px;line-height:1.45;color:#5B6675">3 certified instances per tier · best = proven optimum · both random baselines use the same light-multi decode · random 0/1 = the quantum part replaced by random bits (brief §9.2) · global detuning · S, M: pulser-simulation; L: emu-sv · atoms 4 / 10 / 15</p>
 </div>
-<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">11</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">14</p>
 <aside>机器每个实例输出 1000 个答案，数其中有多少个正好是已证明的最好答案。两种对照，后面的分配步骤完全一样。第一种：把量子部分换成随机的 0/1，这是赛题 9.2 节建议的；机器好 2 到 4 倍（S）、7 到 12 倍（M）、60 到 160 倍（L）。第二种更强：直接随机选 K 个中心；S 和 M 档大致打平，L 档最多好 8 倍。我们两种都放出来。机器真正的本事是让大约一半的答案恰好选出 K 个中心，而随机 0/1 在 L 档只有 3% 能做到；当它给出合法答案时，选中最好答案的概率是随机 K 个中心的 1.4 到 15 倍。</aside>
 </section>

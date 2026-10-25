@@ -1,7 +1,7 @@
 <section id="loss" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:48px">
 <div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
-<p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">A1</p>
-<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">Loss = cluster + capacity</h2>
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">A</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">Idea: write the cost directly</h2>
 </div>
 <div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:48px">
 <img src="/_blob/1c3849eadd25873c809e0815a865a16d" alt="Total Loss = C cluster + lambda P capacity" style="width:1137px;height:84px;object-fit:contain">
@@ -11,9 +11,9 @@
 </div>
 <div style="display:flex;flex-direction:row;gap:56px;align-items:center">
 <img src="/_blob/8e6086fa4cd6dcf97083da34b74a13b2" alt="P capacity = (3 x A + 4 x B + 2 x C + 3 x D minus 6) squared" style="width:1004px;height:72px;object-fit:contain">
-<p style="font-size:32px;color:#5B6675">→ <b style="color:#16202B">pass the line</b></p>
+<p style="font-size:32px;color:#5B6675">→ <b style="color:#16202B">pass the line, no slack bits</b></p>
 </div>
 </div>
-<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">3</p>
-<aside>例子：A、B、C、D 四个客户，需求 3、4、2、3，两辆车，容量 7，bit = 1 表示 1 号车。cluster：两个客户同车时括号等于 1，加上它们的距离，要优化。capacity：系数是需求，6 是总需求的一半；合法分法得 0 或 1 分，超载至少 4 分，只要过及格线就行。关键：不加 slack bit。</aside>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">4</p>
+<aside>Model A 的思路：直接把成本写成 QUBO。总 loss = cluster + λ × capacity。例子：A、B、C、D 四个客户，需求 3、4、2、3，两辆车，容量 7，bit = 1 表示 1 号车。cluster：两个客户同车时括号等于 1，加上它们的距离，要优化。capacity：系数是需求，6 是总需求的一半；合法分法得 0 或 1 分，超载至少 4 分，只要过及格线。关键是不加 slack bit，所以原子数是 4/30/60，教科书做法要 14/45/80。M/L 档一个客户一辆车一个 bit，再加每个客户恰好一辆车的惩罚。</aside>
 </section>

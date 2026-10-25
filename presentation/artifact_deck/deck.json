@@ -3,12 +3,13 @@
   "createdOnFiles": {"v": 1, "at": "2026-10-25T03:20:00Z"},
   "lists": "css",
   "title": "Pasqal Track A",
-  "order": ["cover", "instances", "loss", "expanded", "mismatch", "distance", "modelb", "how", "layout", "pulse", "results", "summary"],
+  "order": ["cover", "problem", "overview", "loss", "aqubo", "distance", "aresult", "lesson", "modelb", "bqubo", "layout", "pulse", "how", "results", "summary"],
   "sections": {
-    "s1": {"description": "Two questions, A2 instances.", "start": "cover"},
-    "s2": {"description": "A1: the QUBO.", "start": "loss"},
-    "s3": {"description": "A3: matching Pasqal's energy and laying out the atoms.", "start": "mismatch"},
-    "s4": {"description": "Model B, A4 pulse, results, summary.", "start": "modelb"}
+    "s1": {"description": "The problem and the two models.", "start": "cover"},
+    "s2": {"description": "Model A: idea, QUBO to energy, layout, laser and result.", "start": "loss"},
+    "s3": {"description": "Why A fails and what B changes.", "start": "lesson"},
+    "s4": {"description": "Model B: idea, QUBO = energy, layout, laser, how it runs, result.", "start": "modelb"},
+    "s5": {"description": "Summary.", "start": "summary"}
   },
   "faces": {
     "source-serif-4": {"family": "Source Serif 4", "href": "https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400..700&display=swap"},

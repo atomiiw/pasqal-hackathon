@@ -1,0 +1,22 @@
+<section id="aqubo" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:44px">
+<div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">A</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">QUBO → machine energy</h2>
+</div>
+<div style="flex:1;display:flex;flex-direction:row;gap:64px;align-items:center">
+<div style="display:flex;flex-direction:column;gap:36px">
+<p style="font-size:28px;font-weight:600;color:#5B6675">our QUBO</p>
+<img src="/_blob/833d615c7d3c7262e9ed8c04207b1533" alt="Total Loss = const + sum of a i x i + sum of b ij x i x j" style="width:860px;height:103px;object-fit:contain">
+<p style="font-size:28px;font-weight:600;color:#5B6675">Pasqal energy</p>
+<img src="/_blob/dfa9eabd8e16bdaa1274dcd93db0626c" alt="E = sum of minus delta x i + sum of C6 over r ij to the sixth x i x j" style="width:700px;height:144px;object-fit:contain">
+</div>
+<table style="width:740px;font-size:30px;color:#16202B">
+<tr><th style="width:36%">term</th><th style="width:64%">match?</th></tr>
+<tr><td>per bit</td><td style="color:#A8540F">no: a differs, −δ is one value</td></tr>
+<tr><td>per pair</td><td>approx.: b set by distance r</td></tr>
+<tr><td>pair sign</td><td style="color:#2156A5">yes: both positive</td></tr>
+</table>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">5</p>
+<aside>把 QUBO 展开：每个原子前面一个数 a，每对原子前面一个数 b。a = −S + λq(q − D)，b = 2d + 2λq_iq_j。Pasqal 的能量在激光关掉后也正好是这两个槽位：每个原子前面是 −δ，所有原子共用一个值；每对原子前面是 C6/r⁶，由原子距离决定。所以要让机器“算”我们的 QUBO，就要选原子距离 r，让 C6/r⁶ 等于 b。对照：每个 bit 的系数对不上；每对原子只能近似；符号一致。</aside>
+</section>
