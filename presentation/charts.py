@@ -1,75 +1,177 @@
-"""Auditor-editable, publication-style figures. Blue=model, green=match, red=mismatch."""
+"""Figures and typeset equations for the Track A deck. One function per figure.
+
+Colour meaning is fixed across the deck:
+  BLUE  = our model      GREEN = matches Pasqal / model B
+  AMBER = approximate    RED   = mismatch / device limit
+"""
 from pathlib import Path
+
 import numpy as np
 import matplotlib
-matplotlib.use('Agg')
+
+matplotlib.use("Agg")
 import matplotlib.pyplot as plt
-BLUE='#245B94'; GREEN='#26805D'; RED='#B5443C'; GREY='#59616A'
-plt.rcParams.update({'font.family':'DejaVu Sans','font.size':16,'axes.labelsize':16,'axes.titlesize':18,'xtick.labelsize':15,'ytick.labelsize':15,'text.color':'#24292F','axes.labelcolor':'#39424C','axes.edgecolor':'#89939D','axes.linewidth':.7,'axes.facecolor':'white','figure.facecolor':'white','savefig.facecolor':'white','legend.frameon':False,'svg.fonttype':'none'})
-def save(fig,out,name):
-    out=Path(out); out.mkdir(parents=True,exist_ok=True)
-    for ext in ('png','svg'): fig.savefig(out/f'{name}.{ext}',dpi=300,bbox_inches='tight',pad_inches=.2)
-    plt.close(fig); return out/f'{name}.png'
-def clean(ax):
-    ax.spines[['top','right']].set_visible(False); ax.grid(axis='y',color='#DCE2E7',lw=.6); ax.set_axisbelow(True)
-def atom_counts(rows,out):
-    fig,ax=plt.subplots(figsize=(7.6,3.7),layout='constrained'); x=np.arange(3); w=.24
-    for shift,vals,label,col in [(-w,[r['onehot_plus_slack'] for r in rows],'Textbook slack',GREY),(0,[r['ours'] for r in rows],'Direct QUBO baseline',BLUE),(w,[4,10,15],'Seed model B (under test)',GREEN)]:
-        bars=ax.bar(x+shift,vals,w,color=col,label=label); ax.bar_label(bars,padding=4,fontsize=16)
-    ax.axhline(80,color=RED,ls='--',lw=1); ax.text(1.95,83,'80 atoms',color=RED,fontsize=14)
-    ax.set(xticks=x,xticklabels=['S','M','L'],ylabel='Binary variables / atoms',ylim=(0,108)); ax.legend(loc='upper left',fontsize=13); clean(ax)
-    return save(fig,out,'01_atom_counts')
-def instance_maps(instances,out):
-    fig,axs=plt.subplots(1,3,figsize=(13.8,4.4),layout='constrained'); cols=[BLUE,GREEN,RED,'#A77922']
-    for ax,inst in zip(axs,instances):
-        xy=np.asarray(inst.coords)
-        for k in range(inst.K):
-            ids=[i for i,t in enumerate(inst.certificate) if t==k]; ax.scatter(*xy[ids].T,s=65,color=cols[k],edgecolor='white',linewidth=.7)
-        ax.scatter(*inst.depot,marker='s',s=70,color='#24292F')
-        ax.set(xlim=(-5,105),ylim=(-5,105),xlabel='x / distance units',ylabel='y / distance units')
-        ax.set_title(f'{inst.tier}: N={inst.N}, K={inst.K}, Q={inst.Q}',loc='left',pad=16); ax.set_aspect('equal'); clean(ax)
-        ax.text(.02,.03,f'ρ = {inst.rho:.2f}\ndmax/Q = {inst.dmax_ratio:.2f}',transform=ax.transAxes,fontsize=14)
-    return save(fig,out,'02_certified_instances')
-def loss_equations(out):
-    fig=plt.figure(figsize=(13.6,4.5)); fig.text(.03,.88,r'$\mathcal{L}=C_{\mathrm{cluster}}+A\,P_{\mathrm{assign}}+\lambda\,P_{\mathrm{balance}}$',fontsize=30,color=BLUE)
-    fig.text(.03,.67,'CLUSTER FUNCTION — optimize',color=BLUE,fontsize=17,weight='bold'); fig.text(.03,.49,r'$C=\sum_k\sum_{i<j} c_{ij}\,x_{ik}x_{jk}$',fontsize=26)
-    fig.text(.54,.67,'CAPACITY — pass/fail: every load ≤ Q',color=RED,fontsize=17,weight='bold'); fig.text(.54,.49,r'$P_{\mathrm{balance}}=\sum_k(L_k-D/K)^2$',fontsize=26)
-    fig.text(.54,.34,'Surrogate keeps rewarding balance.',fontsize=17,color=RED)
-    fig.text(.03,.13,r'$\mathcal{L}=\mathrm{const}+\sum_a a_a x_a+\sum_{a<b}b_{ab}x_ax_b$',fontsize=29,color=BLUE)
-    return save(fig,out,'03_loss_and_expansion')
-def energy_comparison(out):
-    fig=plt.figure(figsize=(13.7,4.6)); fig.text(.02,.86,'OUR QUBO (scaled)',fontsize=18,color=BLUE,weight='bold')
-    fig.text(.02,.68,r'$s\mathcal{L}-\mathrm{const}\ =$',fontsize=28,color=BLUE); fig.text(.40,.68,r'$\sum_a s a_a x_a$',fontsize=28,color=RED); fig.text(.69,.68,r'$+\ \sum_{a<b}s b_{ab}x_ax_b$',fontsize=28,color=GREEN)
-    fig.text(.02,.43,'PASQAL E EQUATION (Ω = 0)',fontsize=18,color=BLUE,weight='bold'); fig.text(.02,.22,r'$E_{\mathrm{hw}}/\hbar\ =$',fontsize=28,color=BLUE); fig.text(.40,.22,r'$-\delta\sum_a x_a$',fontsize=28,color=RED); fig.text(.69,.22,r'$+\ \sum_{a<b}\frac{C_6}{r_{ab}^6}x_ax_b$',fontsize=28,color=GREEN)
-    return save(fig,out,'04_qubo_vs_pasqal')
-def distances(target,C6,out,coords=None):
-    vals=target[np.triu_indices(len(target),1)]; wanted=(C6/vals[vals>0])**(1/6)
-    fig,axs=plt.subplots(1,2,figsize=(9.8,3.7),layout='constrained'); ax=axs[0]; ax.hist(wanted,bins=13,color=BLUE,edgecolor='white',lw=.8)
-    ax.axvline(5,color=RED,lw=1.4,ls='--',label='Minimum spacing: 5 µm'); ax.set(xlabel='Individually wanted distance / µm',ylabel='Number of pairs'); ax.legend(fontsize=13); clean(ax)
-    ax=axs[1]
-    if coords is not None:
-        from matplotlib.patches import Circle
-        ax.add_patch(Circle((0,0),38,fill=False,ls='--',lw=.8,color=GREY)); ax.scatter(*np.array(coords).T,color=BLUE,s=45)
-    ax.set(xlabel='x / µm',ylabel='y / µm',xlim=(-40,40),ylim=(-40,40)); ax.set_aspect('equal'); clean(ax); ax.set_title('B: legal trial layout',fontsize=16)
-    return save(fig,out,'05_requested_atom_distances')
-def expected_loss(out):
-    fig=plt.figure(figsize=(13.8,.9))
-    fig.text(.02,.35,r'$\mathbb{E}[C\mid\mathrm{feasible}]=\frac{\sum_{x\in F}p(x\mid\mathbf{r},\Omega(t),\delta(t),T)\,C(\mathrm{decode}(x))}{P(F)}$',fontsize=25,color=BLUE)
-    return save(fig,out,'05_expected_loss')
-def pulse_waveforms(amp,det,out):
-    fig,axs=plt.subplots(2,1,figsize=(8.4,4.2),sharex=True,layout='constrained'); t=np.arange(len(amp))/1000
-    axs[0].plot(t,amp,color=BLUE,lw=2); axs[0].set(ylabel='Ω / rad µs⁻¹',ylim=(-.5,13.5)); axs[0].axhline(12.566370614,color=RED,lw=1,ls='--')
-    axs[1].plot(t,det,color=BLUE,lw=2); axs[1].set(ylabel='δ / rad µs⁻¹',xlabel='Time / µs')
-    for ax in axs: clean(ax)
-    return save(fig,out,'06_proposed_pulse')
-def mock_results(rows,out):
-    fig,axs=plt.subplots(1,3,figsize=(13.6,3.5),layout='constrained')
-    for ax,key,title in zip(axs,['feasibility_rate','model_gap_pct','cvrp_gap_pct'],['Feasibility rate / %','Model gap / %','CVRP gap / %']):
-        for method,col,shift in [('Baseline pulse',GREY,-.06),('Tuned pulse',BLUE,.06)]:
-            means=[]; mins=[]; maxs=[]
-            for i,t in enumerate('SML'):
-                v=np.array([float(r[key]) for r in rows if r['instance'].startswith(t) and r['method']==method]); v=v*100 if key=='feasibility_rate' else v
-                means.append(v.mean()); mins.append(v.mean()-v.min()); maxs.append(v.max()-v.mean()); ax.scatter(np.full(len(v),i+shift),v,color=col,s=18,alpha=.5)
-            ax.errorbar(np.arange(3)+shift,means,yerr=[mins,maxs],color=col,marker='o',lw=1.6,capsize=3,label=method)
-        ax.set(xticks=np.arange(3),xticklabels=list('SML'),title=title); clean(ax); ax.set_ylim(bottom=0)
-    axs[0].set_ylim(0,105); axs[0].legend(fontsize=13,loc='lower left'); return save(fig,out,'07_MOCK_metrics')
+from matplotlib.patches import Circle
+from matplotlib.transforms import IdentityTransform
+
+INK = "#17202A"; MUTED = "#5E6A78"; FAINT = "#A3ADB8"; LINE = "#E4E8ED"
+BLUE = "#1D4E89"; GREEN = "#1E7B4F"; AMBER = "#B7791F"; RED = "#B42318"; GREY = "#9AA4AF"
+TRUCKS = ["#3B6EA8", "#D08C3A", "#4E9F7E", "#8A6BBE"]
+DPI = 300
+
+plt.rcParams.update({
+    "font.family": "Arial", "font.size": 13, "mathtext.fontset": "cm",
+    "text.color": INK, "axes.labelcolor": MUTED, "axes.edgecolor": FAINT, "axes.linewidth": 0.8,
+    "xtick.color": MUTED, "ytick.color": MUTED, "xtick.labelsize": 12, "ytick.labelsize": 12,
+    "axes.labelsize": 13, "axes.titlesize": 13, "axes.titlecolor": INK, "axes.titleweight": "bold",
+    "axes.titlelocation": "left", "legend.frameon": False, "legend.fontsize": 12,
+    "figure.facecolor": "white", "axes.facecolor": "white", "savefig.facecolor": "white", "svg.fonttype": "none",
+})
+
+
+def _save(fig, out, name, transparent=False):
+    out = Path(out); out.mkdir(parents=True, exist_ok=True)
+    for ext in ("png", "svg"):
+        fig.savefig(out / f"{name}.{ext}", dpi=DPI, bbox_inches="tight", pad_inches=0.06, transparent=transparent)
+    plt.close(fig)
+    return out / f"{name}.png"
+
+
+def _clean(ax, grid="y"):
+    ax.spines[["top", "right"]].set_visible(False)
+    if grid:
+        ax.grid(axis=grid, color=LINE, lw=0.8); ax.set_axisbelow(True)
+
+
+# ---------------------------------------------------------------- equations
+def equation(parts, out, name, size=28):
+    """Typeset one equation from coloured pieces [(tex, colour), ...] on a shared baseline.
+    Saved at its natural size: 1 pt of `size` = 1 pt on the slide when placed at px/DPI inches."""
+    fig = plt.figure(figsize=(30, 3), dpi=DPI)
+    r = fig.canvas.get_renderer()
+    wpx = fig.bbox.width
+    x = 20.0
+    for tex, col in parts:
+        t = fig.text(x / wpx, 0.4, tex, fontsize=size, color=col, va="baseline", ha="left")
+        x += t.get_window_extent(r).width + size * 0.35 * DPI / 72
+    return _save(fig, out, name, transparent=True)
+
+
+# ---------------------------------------------------------------- slide 1
+def atom_counts(rows, out):
+    fig, ax = plt.subplots(figsize=(6.4, 3.6), layout="constrained")
+    x = np.arange(3); w = 0.26
+    series = [("Textbook + slack bits", [r["onehot_plus_slack"] for r in rows], GREY),
+              ("Direct QUBO (model A)", [r["ours"] for r in rows], BLUE),
+              ("Seed model (model B)", [4, 10, 15], GREEN)]
+    for j, (label, vals, col) in enumerate(series):
+        bars = ax.bar(x + (j - 1) * w, vals, w * 0.92, color=col, label=label)
+        ax.bar_label(bars, padding=3, fontsize=12, color=INK)
+    ax.axhline(80, color=RED, ls=(0, (4, 3)), lw=1.1)
+    ax.text(2.42, 82, "80-atom limit", color=RED, fontsize=11, ha="right", va="bottom")
+    ax.set(xticks=x, xticklabels=["S  (N=4)", "M  (N=10)", "L  (N=15)"], ylabel="atoms", ylim=(0, 100))
+    ax.legend(loc="lower left", bbox_to_anchor=(0, 1.02), ncol=3, fontsize=10.5, handlelength=1.2, columnspacing=1.2)
+    _clean(ax)
+    return _save(fig, out, "s1_atom_counts")
+
+
+# ---------------------------------------------------------------- slide 2
+def instance_maps(insts, out):
+    fig, axs = plt.subplots(1, 3, figsize=(12.4, 3.9), layout="constrained")
+    for ax, inst in zip(axs, insts):
+        xy = np.asarray(inst.coords, float)
+        for k, g in enumerate(inst.references["model_groups"]):
+            ax.scatter(*xy[g].T, s=46, color=TRUCKS[k], edgecolor="white", lw=0.6, zorder=3)
+        ax.scatter(*inst.depot, marker="s", s=48, color=INK, zorder=3)
+        ax.set_title(f"{inst.tier}    N = {inst.N},  K = {inst.K},  Q = {inst.Q}", fontsize=13)
+        ax.set(xlim=(-4, 104), ylim=(-4, 104), xticks=[0, 50, 100], yticks=[0, 50, 100])
+        ax.set_aspect("equal"); _clean(ax, grid=None)
+        for s in ("left", "bottom"):
+            ax.spines[s].set_color(LINE)
+    return _save(fig, out, "s2_instances")
+
+
+# ---------------------------------------------------------------- slide 5
+def s_layout(coords, letters, out):
+    c = np.asarray(coords)
+    fig, ax = plt.subplots(figsize=(3.6, 3.4), layout="constrained")
+    for i in range(len(c)):
+        for j in range(i + 1, len(c)):
+            ax.plot(*c[[i, j]].T, color=LINE, lw=1.2, zorder=1)
+        ax.add_patch(Circle(c[i], 2.5, fill=False, ls=(0, (2, 2)), lw=0.8, color=FAINT))
+        ax.scatter(*c[i], s=420, color=BLUE, zorder=3)
+        ax.text(*c[i], letters[i], color="white", ha="center", va="center", fontsize=13, weight="bold", zorder=4)
+    m = np.abs(c).max() + 3.5
+    ax.set(xlim=(-m, m), ylim=(-m, m), xlabel="x / µm", ylabel="y / µm")
+    ax.set_aspect("equal"); _clean(ax, grid=None)
+    return _save(fig, out, "s5_S_layout")
+
+
+def m_wanted_distances(target_U, C6, out):
+    v = target_U[np.triu_indices(len(target_U), 1)]
+    r = (C6 / v[v > 0]) ** (1 / 6)
+    fig, ax = plt.subplots(figsize=(4.2, 3.3), layout="constrained")
+    ax.axvspan(3.5, 5, color=RED, alpha=0.07, lw=0)
+    ax.hist(r, bins=np.arange(5.0, 7.31, 0.15), color=BLUE, edgecolor="white", lw=0.8)
+    ax.axvline(5, color=RED, lw=1.2, ls=(0, (4, 3)))
+    ax.text(4.6, ax.get_ylim()[1] * 0.5, "not\nallowed", color=RED, fontsize=11, ha="center", va="center")
+    ax.set(xlim=(4.2, 7.4), xlabel="wanted atom distance r / µm", ylabel="atom pairs")
+    _clean(ax)
+    return _save(fig, out, "s5_M_wanted")
+
+
+# ---------------------------------------------------------------- slide 6
+def model_b(inst, layout, out):
+    bf = layout["brute_force_light"]
+    groups, seeds = bf["model_groups"], bf["model_seeds"]
+    xy = np.asarray(inst.coords, float); c = np.asarray(layout["coords"]); Rb = layout["Rb"]
+    col = np.empty(inst.N, object)
+    for k, g in enumerate(groups):
+        col[g] = TRUCKS[k]
+    fig, axs = plt.subplots(1, 2, figsize=(8.6, 3.9), layout="constrained")
+    ax = axs[0]
+    ax.scatter(*xy.T, s=60, c=list(col), edgecolor="white", lw=0.6, zorder=3)
+    ax.scatter(*xy[seeds].T, s=260, marker="*", c=[col[s] for s in seeds], edgecolor=INK, lw=0.8, zorder=4)
+    ax.scatter(*inst.depot, marker="s", s=48, color=INK)
+    ax.set_title("Customer map (best answer)")
+    ax.set(xlim=(-4, 104), ylim=(-4, 104), xticks=[0, 50, 100], yticks=[0, 50, 100]); ax.set_aspect("equal"); _clean(ax, grid=None)
+    ax = axs[1]
+    for s in seeds:
+        ax.add_patch(Circle(c[s], Rb, color=col[s], alpha=0.10, lw=0))
+    ax.scatter(*c.T, s=60, color=FAINT, edgecolor="white", lw=0.6, zorder=3)
+    ax.scatter(*c[seeds].T, s=260, marker="*", c=[col[s] for s in seeds], edgecolor=INK, lw=0.8, zorder=4)
+    m = np.abs(c).max() + Rb * 0.6
+    ax.set_title(f"Atoms (shaded: blockade radius {Rb:.0f} µm)")
+    ax.set(xlim=(-m, m), ylim=(-m, m), xlabel="x / µm", ylabel="y / µm"); ax.set_aspect("equal"); _clean(ax, grid=None)
+    return _save(fig, out, "s6_model_b")
+
+
+# ---------------------------------------------------------------- slide 7
+def pulse(amp, det, out, omega_max, T):
+    t = np.arange(len(amp)) / 1000
+    fig, axs = plt.subplots(2, 1, figsize=(6.6, 3.8), sharex=True, layout="constrained")
+    axs[0].fill_between(t, amp, color=BLUE, alpha=0.12, lw=0); axs[0].plot(t, amp, color=BLUE, lw=2)
+    axs[0].axhline(12.566, color=RED, lw=1, ls=(0, (4, 3))); axs[0].text(t[-1], 12.0, "device max", color=RED, fontsize=10, ha="right", va="top")
+    axs[0].set(ylabel="Ω  (rad/µs)", ylim=(0, 14))
+    axs[1].axhline(0, color=LINE, lw=1); axs[1].plot(t, det, color=GREEN, lw=2)
+    axs[1].set(ylabel="δ  (rad/µs)", xlabel="time (µs)")
+    for ax in axs:
+        _clean(ax)
+    return _save(fig, out, "s7_pulse")
+
+
+# ---------------------------------------------------------------- slide 8
+def results(rows, out):
+    """rows: list of dicts with name, b, rand_k, a, qs (P(reach)) and b_feas, randk_feas, a_feas, qs_feas."""
+    names = [r["name"] for r in rows]; x = np.arange(len(rows)); w = 0.2
+    series = [("Model B (this work)", "b", GREEN), ("Random seed sets", "rand_k", GREY),
+              ("Model A, direct QUBO", "a", BLUE), ("qubo-solver default (DMM)", "qs", AMBER)]
+    fig, axs = plt.subplots(1, 2, figsize=(11.4, 3.6), layout="constrained")
+    for ax, suffix, title in [(axs[0], "_feas", "Feasible shots"), (axs[1], "", "Shots that hit the proven optimum")]:
+        for j, (label, key, colr) in enumerate(series):
+            vals = [np.nan if r.get(key + suffix) is None else 100 * r[key + suffix] for r in rows]
+            ax.bar(x + (j - 1.5) * w, vals, w * 0.92, color=colr, label=label)
+        ax.set(xticks=x, xticklabels=names, ylim=(0, 105), ylabel="% of 1000 shots"); ax.set_title(title)
+        _clean(ax)
+    axs[1].legend(loc="upper left", bbox_to_anchor=(1.0, 1.0), fontsize=11)
+    return _save(fig, out, "s8_results")

@@ -1,0 +1,31 @@
+<section id="how" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">B</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">How it runs</h2>
+<p style="font-size:30px;color:#5B6675">M_seed0 · 10 customers · 3 trucks · capacity 20</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:row;gap:48px;align-items:start">
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:28px;font-weight:600;color:#2156A5">1 · atoms on the map</p>
+<img src="/_blob/3a9fbe22c2f6b4b3825e0be69f5acc0d" alt="Ten atoms placed like the customers; overlapping circles mean the two atoms block each other" style="width:380px;height:380px;object-fit:contain">
+<p style="font-size:26px;line-height:1.35;color:#3D4855">circles overlap → cannot both be seeds</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:28px;font-weight:600;color:#2156A5">2 · laser, 2 µs</p>
+<img src="/_blob/6aa70361e9c739dc903393d015fe7c59" alt="Laser pulse: Omega rises to 1.63 and holds; detuning sweeps from minus 5.0 to 1.34 rad per microsecond" style="width:380px;height:344px;object-fit:contain">
+<p style="font-size:26px;line-height:1.35;color:#3D4855">Ω on, δ from −5.0 to 1.34</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:28px;font-weight:600;color:#2156A5">3 · read 1000 times</p>
+<img src="/_blob/43b9e623924cc5769a6e9029ec3fcdab" alt="Histogram of seeds per answer: 305 of 1000 answers have exactly 3 seeds" style="width:366px;height:380px;object-fit:contain">
+<p style="font-size:26px;line-height:1.35;color:#3D4855">305 answers have exactly 3 seeds</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;gap:20px">
+<p style="font-size:28px;font-weight:600;color:#2156A5">4 · join nearest seed with room</p>
+<img src="/_blob/a3968d312e062145962f185e9994cd7f" alt="Most frequent valid answer: seeds A, D, H; other customers join the nearest seed with room" style="width:380px;height:377px;object-fit:contain">
+<p style="font-size:26px;line-height:1.35;color:#3D4855">loads 20 / 19 / 18 ≤ 20 · <b style="color:#2156A5">= the optimum</b></p>
+</div>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">8</p>
+<aside>用 M_seed0 走一遍，全是真实数据。第一步：10 个原子按客户地图摆好，圈是阻塞半径的一半，两个圈重叠就表示这两个原子离得太近，不能同时被激发，也就不能同时当中心。第二步：打 2 微秒激光，Ω 打开，δ 从 −5.0 扫到 1.34。第三步：读 1000 次，每次读出每个原子是 0 还是 1；其中 305 次恰好有 3 个 1，也就是 3 个中心，其余丢掉。第四步：出现最多的合法答案是 A、D、H 三个中心（出现了 19 次），其他客户依次加入最近、还有空位的中心，三辆车装 20、19、18，都不超过 20，而且正好就是已证明的最优解。</aside>
+</section>

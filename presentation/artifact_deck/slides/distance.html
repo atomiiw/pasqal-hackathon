@@ -1,0 +1,28 @@
+<section id="distance" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:44px">
+<div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">A3</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">Atom distance</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:64px;align-items:center">
+<img src="/_blob/7f1ef6e7b00178f3c0dcac3c36d02715" alt="r = (C6 over wanted coupling) to the one sixth" style="width:592px;height:134px;object-fit:contain">
+<p style="font-size:34px;color:#16202B">r ≥ 5 µm  ·  radius ≤ 38 µm</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:row;gap:32px">
+<div style="flex:1;display:flex;flex-direction:row;gap:32px;align-items:center;background:#FDFCFA;border:1px solid #E4E1DA;border-radius:20px;padding:36px">
+<img src="/_blob/405ee9131ee1abc6357648bc6cf8a5ed" alt="Tier S: four atoms A to D in a legal layout" style="width:280px;height:280px;object-fit:contain">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<h3 style="font-family:'Source Serif 4', Georgia, serif;font-size:44px;font-weight:600;color:#2156A5">S · 4 atoms</h3>
+<p style="font-size:32px;color:#16202B">fits, with error η = 0.54</p>
+</div>
+</div>
+<div style="flex:1;display:flex;flex-direction:row;gap:32px;align-items:center;background:#FDFCFA;border:1px solid #E4E1DA;border-radius:20px;padding:36px">
+<img src="/_blob/312daaf23f8071a73c7c60c33fbf7de4" alt="Tier M: wanted distances of all atom pairs, all between 5 and 7 micrometres" style="width:400px;height:257px;object-fit:contain">
+<div style="flex:1;display:flex;flex-direction:column;gap:16px">
+<h3 style="font-family:'Source Serif 4', Georgia, serif;font-size:44px;font-weight:600;color:#A8540F">M · 30 atoms</h3>
+<p style="font-size:32px;color:#16202B">does not fit</p>
+</div>
+</div>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">6</p>
+<aside>想要的耦合除以 C6 开六次方，就是想要的距离，必须 ≥ 5 µm、半径 ≤ 38 µm。S 档 4 个原子能摆出来（误差 η = 0.54）。M 档 30 个原子摆不出来：右图是所有原子对想要的距离，全挤在 5 到 7 µm；每个原子要 11 个这么近的邻居，平面上只放得下大约 6 个。实测最优解在实际能量下排到 8,784 到 19,930 名（共 59,049 个），等于没有信息。这就是我们需要 model B 的原因。</aside>
+</section>

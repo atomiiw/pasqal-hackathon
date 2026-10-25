@@ -1,0 +1,17 @@
+<section id="results" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">Results</h2>
+<p style="font-size:32px;color:#5B6675">share of 1000 answers that are the best answer</p>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:44px">
+<table style="width:1500px;font-size:38px;color:#16202B">
+<tr><th style="width:16%">tier</th><th style="width:28%;text-align:right">machine</th><th style="width:28%;text-align:right">random guess</th><th style="width:28%;text-align:right">better by</th></tr>
+<tr><td>S</td><td style="text-align:right">51–91 %</td><td style="text-align:right">25–27 %</td><td style="text-align:right;color:#2156A5"><b>2–4×</b></td></tr>
+<tr><td>M</td><td style="text-align:right">13–20 %</td><td style="text-align:right">1.6–2.9 %</td><td style="text-align:right;color:#2156A5"><b>7–12×</b></td></tr>
+<tr><td>L</td><td style="text-align:right">2–32 %</td><td style="text-align:right">0–0.2 %</td><td style="text-align:right;color:#2156A5"><b>60–160×</b></td></tr>
+</table>
+<p style="font-size:24px;line-height:1.45;color:#5B6675">3 certified instances per tier · best = proven optimum · random guess = random bitstrings, same decode (brief §9.2) · stricter baseline, random K seeds: M 0.7–1.1×, L 0.7–8× · light-multi decode · global detuning · S, M: pulser-simulation; L: emu-sv · atoms 4 / 10 / 15</p>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">11</p>
+<aside>机器每个实例输出 1000 个答案，我们数其中有多少个正好是已证明的最好答案，再和乱猜对比：把量子部分换成随机的 0/1，后面的分配步骤完全一样（这是赛题 9.2 节建议的对照）。S 档机器 51% 到 91%，乱猜 25% 到 27%，好 2 到 4 倍；M 档机器 13% 到 20%，乱猜 1.6% 到 2.9%，好 7 到 12 倍；L 档机器 2% 到 32%，乱猜 0 到 0.2%，好 60 到 160 倍（L_seed1 乱猜一次都没中，不计倍数）。如果评委问更强的对照：随机选 K 个中心再分配，M 档大致打平（0.7 到 1.1 倍），L 档 0.7 到 8 倍。机器的主要贡献是让一半左右的答案恰好选出 K 个中心，而乱猜在 L 档只有 3% 能做到。</aside>
+</section>

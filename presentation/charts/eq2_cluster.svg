@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+  "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg xmlns:xlink="http://www.w3.org/1999/xlink" width="318.24pt" height="52.84pt" viewBox="0 0 318.24 52.84" xmlns="http://www.w3.org/2000/svg" version="1.1">
+ <metadata>
+  <rdf:RDF xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:cc="http://creativecommons.org/ns#" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+   <cc:Work>
+    <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
+    <dc:date>2026-10-25T02:48:25.365613</dc:date>
+    <dc:format>image/svg+xml</dc:format>
+    <dc:creator>
+     <cc:Agent>
+      <dc:title>Matplotlib v3.11.2, https://matplotlib.org/</dc:title>
+     </cc:Agent>
+    </dc:creator>
+   </cc:Work>
+  </rdf:RDF>
+ </metadata>
+ <defs>
+  <style type="text/css">*{stroke-linejoin: round; stroke-linecap: butt}</style>
+ </defs>
+ <g id="figure_1">
+  <g id="patch_1">
+   <path d="M 0 52.84 
+L 318.24 52.84 
+L 318.24 0 
+L 0 0 
+L 0 52.84 
+z
+" style="fill: none"/>
+  </g>
+  <g id="text_1">
+   <!-- $C_{\mathrm{cluster}}=\sum_{i&lt;j} d_{ij}\,(1-x_i-x_j+2x_ix_j)$ -->
+   <g style="fill: #17202a" transform="translate(4.32 25.12)">
+    <text>
+     <tspan x="0" y="-0.333333" style="font-size: 20px; font-family: 'cmmi10'; fill: #17202a">C</tspan>
+     <tspan x="106.512677" y="-0.333333" style="font-size: 20px; font-family: 'cmmi10'; fill: #17202a">d</tspan>
+     <tspan x="173.266559" y="-0.333333" style="font-size: 20px; font-family: 'cmmi10'; fill: #17202a">x</tspan>
+     <tspan x="214.183126" y="-0.333333" style="font-size: 20px; font-family: 'cmmi10'; fill: #17202a">x</tspan>
+     <tspan x="266.036217" y="-0.333333" style="font-size: 20px; font-family: 'cmmi10'; fill: #17202a">x</tspan>
+     <tspan x="283.415651" y="-0.333333" style="font-size: 20px; font-family: 'cmmi10'; fill: #17202a">x</tspan>
+     <tspan x="14.277344" y="2.666659" style="font-size: 14px; font-family: 'cmr10'; fill: #17202a">c</tspan>
+     <tspan x="20.491211" y="2.666659" style="font-size: 14px; font-family: 'cmr10'; fill: #17202a">l</tspan>
+     <tspan x="24.367188" y="2.666659" style="font-size: 14px; font-family: 'cmr10'; fill: #17202a">u</tspan>
+     <tspan x="32.139648" y="2.666659" style="font-size: 14px; font-family: 'cmr10'; fill: #17202a">s</tspan>
+     <tspan x="37.65625" y="2.666659" style="font-size: 14px; font-family: 'cmr10'; fill: #17202a">t</tspan>
+     <tspan x="43.09082" y="2.666659" style="font-size: 14px; font-family: 'cmr10'; fill: #17202a">e</tspan>
+     <tspan x="49.304688" y="2.666659" style="font-size: 14px; font-family: 'cmr10'; fill: #17202a">r</tspan>
+     <tspan x="59.924368" y="-0.333333" style="font-size: 20px; font-family: 'cmr10'; fill: #17202a">=</tspan>
+     <tspan x="131.965755" y="-0.333333" style="font-size: 20px; font-family: 'cmr10'; fill: #17202a">(</tspan>
+     <tspan x="139.729427" y="-0.333333" style="font-size: 20px; font-family: 'cmr10'; fill: #17202a">1</tspan>
+     <tspan x="236.499096" y="-0.333333" style="font-size: 20px; font-family: 'cmr10'; fill: #17202a">+</tspan>
+     <tspan x="256.036217" y="-0.333333" style="font-size: 20px; font-family: 'cmr10'; fill: #17202a">2</tspan>
+     <tspan x="301.731609" y="-0.333333" style="font-size: 20px; font-family: 'cmr10'; fill: #17202a">)</tspan>
+     <tspan x="79.461489" y="-21" style="font-size: 20px; font-family: 'cmex10'; fill: #17202a">X</tspan>
+     <tspan x="79.461489" y="20.003125" style="font-size: 14px; font-family: 'cmmi10'; fill: #17202a">i</tspan>
+     <tspan x="87.080833" y="20.003125" style="font-size: 14px; font-family: 'cmmi10'; fill: #17202a">&lt;</tspan>
+     <tspan x="100.756817" y="20.003125" style="font-size: 14px; font-family: 'cmmi10'; fill: #17202a">j</tspan>
+     <tspan x="116.913067" y="2.666659" style="font-size: 14px; font-family: 'cmmi10'; fill: #17202a">i</tspan>
+     <tspan x="121.732403" y="2.666659" style="font-size: 14px; font-family: 'cmmi10'; fill: #17202a">j</tspan>
+     <tspan x="184.682575" y="2.666659" style="font-size: 14px; font-family: 'cmmi10'; fill: #17202a">i</tspan>
+     <tspan x="225.599142" y="2.666659" style="font-size: 14px; font-family: 'cmmi10'; fill: #17202a">j</tspan>
+     <tspan x="277.452232" y="2.666659" style="font-size: 14px; font-family: 'cmmi10'; fill: #17202a">i</tspan>
+     <tspan x="294.831667" y="2.666659" style="font-size: 14px; font-family: 'cmmi10'; fill: #17202a">j</tspan>
+     <tspan x="153.729439" y="-0.333333" style="font-size: 20px; font-family: 'cmsy10'; fill: #17202a">¡</tspan>
+     <tspan x="194.646006" y="-0.333333" style="font-size: 20px; font-family: 'cmsy10'; fill: #17202a">¡</tspan>
+    </text>
+   </g>
+  </g>
+ </g>
+</svg>

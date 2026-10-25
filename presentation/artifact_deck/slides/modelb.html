@@ -1,0 +1,23 @@
+<section id="modelb" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:48px">
+<div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">B</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">Model B: one atom per customer</h2>
+</div>
+<div style="flex:1;display:flex;flex-direction:row;align-items:center;gap:96px">
+<div style="flex:1;display:flex;flex-direction:column;gap:48px">
+<img src="/_blob/b43ca977b86c5bdb536f570105b0d0ed" alt="E = minus delta times sum of x i + sum of C6 over (alpha d ij) to the sixth x i x j" style="width:930px;height:168px;object-fit:contain">
+<table style="width:900px;font-size:30px;color:#16202B">
+<tr><th style="width:40%">term</th><th style="width:60%">match?</th></tr>
+<tr><td>per bit</td><td style="color:#2156A5">yes, one −δ</td></tr>
+<tr><td>per pair</td><td>approximately, set by the map</td></tr>
+<tr><td>capacity</td><td>checked after the shot</td></tr>
+</table>
+</div>
+<div style="display:flex;flex-direction:column;gap:24px">
+<img src="/_blob/b19708310e19bb0e2a14eef4703a8be7" alt="M_seed0 customer map, best answer, stars are the seed customers" style="width:300px;height:300px;object-fit:contain">
+<img src="/_blob/c9e4fdab11bedf3fd2c92b928fe72466" alt="M_seed0 atom register, same picture scaled to micrometres, shaded discs are the blockade radius" style="width:300px;height:300px;object-fit:contain">
+</div>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">7</p>
+<aside>M、L 档上直接 QUBO 摆不出来：每个原子要 11 个 5 到 7 µm 的邻居，平面上只放得下大约 6 个，最优解排到一万名左右（共 59,049）。所以换个问法：每个客户一个原子，就按客户地图摆。bit = 1 表示这个客户是一辆车的中心（星号）。离得近的客户互相阻塞，能量最低的就是 K 个分得最开的中心；其余客户在 shot 之后加入最近、还有空位的组，容量在这里检查。原子数 4/10/15。</aside>
+</section>

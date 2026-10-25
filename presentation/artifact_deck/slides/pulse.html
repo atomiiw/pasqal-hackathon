@@ -1,0 +1,17 @@
+<section id="pulse" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">A4</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">Laser settings: three knobs</h2>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center">
+<table style="width:1664px;font-size:32px;color:#16202B">
+<tr><th style="width:26%">knob</th><th style="width:28%">tried</th><th style="width:16%">per</th><th style="width:30%">chosen  S / M / L</th></tr>
+<tr><td>strength Ω</td><td>blockade radius 7, 9, 12 µm</td><td>tier</td><td><b>7.36 / 1.63 / 1.63</b> rad/µs</td></tr>
+<tr><td>duration T</td><td>2000, 4000, 6000 ns</td><td>tier</td><td><b>4000 / 2000 / 6000</b> ns</td></tr>
+<tr><td>final detuning δ</td><td>c = 0.7 … 1.9 × window middle</td><td>instance</td><td><b>c = 1.3–1.9</b></td></tr>
+<tr><td>picked by</td><td>share of best answers, then usable</td><td>—</td><td>1000 shots each</td></tr>
+</table>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">10</p>
+<aside>A4 只有三个旋钮。一，激光强度 Ω：它决定阻塞半径 R_b，试了 7、9、12 µm，每档选一个，S 选 7 µm（Ω = 7.36），M 和 L 选 9 µm（Ω = 1.63），都低于设备上限 12.57。二，时长 T：试了 2000、4000、6000 ns，每档选一个。三，最终 δ：先由几何算出“恰好 K 个中心能量最低”那个窗口的中点，再对每个实例乘一个倍数 c，试了 0.7 到 1.9，选出来的都在 1.3 到 1.9。挑选标准按赛题 8.2：先看命中最好答案的比例，再看能用的比例，每个设置跑 1000 次。所有脉冲都是 Ω 从 0 升起、保持、降回 0，δ 从负扫到正，Pulser 设备检查全部通过。</aside>
+</section>

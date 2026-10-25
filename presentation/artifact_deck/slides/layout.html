@@ -1,0 +1,18 @@
+<section id="layout" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">A3</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">Atom layout: the map is the layout</h2>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:56px">
+<img src="/_blob/53d84ecd558a5989dbfc2abbfba84a00" alt="r ij = alpha d ij, alpha = R b over r c, R b = (C6 over Omega) to the one sixth" style="width:1019px;height:145px;object-fit:contain">
+<table style="width:1300px;font-size:32px;color:#16202B">
+<tr><th style="width:40%"></th><th style="width:20%;text-align:right">S</th><th style="width:20%;text-align:right">M</th><th style="width:20%;text-align:right">L</th></tr>
+<tr><td>atoms</td><td style="text-align:right">4</td><td style="text-align:right">10</td><td style="text-align:right">15</td></tr>
+<tr><td>blockade radius</td><td style="text-align:right">7 µm</td><td style="text-align:right">9 µm</td><td style="text-align:right">9 µm</td></tr>
+<tr><td>layout radius (≤ 38)</td><td style="text-align:right">6–8 µm</td><td style="text-align:right">10–11 µm</td><td style="text-align:right">14 µm</td></tr>
+<tr><td>Pulser device check</td><td style="text-align:right;color:#2156A5">pass</td><td style="text-align:right;color:#2156A5">pass</td><td style="text-align:right;color:#2156A5">pass</td></tr>
+</table>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">9</p>
+<aside>model B 的原子位置就是客户地图按比例缩小：原子距离 = α × 客户距离。α 的选法：让地图上的阈值距离 r_c 正好落在阻塞半径 R_b 上；R_b 由激光强度 Ω 决定。地图上比 r_c 近的两个客户，原子就落在同一个阻塞半径里，不能同时当中心。r_c 和 α 都只由几何算出，不用求解器。三档布局半径都远小于 38 µm 的上限，间距 ≥ 5 µm（太近的对抬到 5.5 µm，它们本来就被阻塞），全部通过 Pulser 的设备检查。</aside>
+</section>
