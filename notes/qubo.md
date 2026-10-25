@@ -176,7 +176,7 @@ Pairs that would land under 5 µm are floored at 5.5 µm (they are blockaded eit
 | 0110 | B, C | A→C, D→? B 4+4 = 8, C 3+1+4 = 8 | – | ❌ (discarded) |
 | 1000 | A | one seed only | – | ❌ (discarded) |
 
-Two decoders, both reported on the same shots: **light** = above, $O(N^2 K)$, the headline; **exact** = cheapest capacity-feasible assignment of the non-seeds to the given seeds (a small generalised assignment problem, classical post-processing, labelled as such).
+Three decoders, all reported on the same shots: **light** = above, $O(N^2 K)$; **light-multi** = light under 3 fixed item orders (demand descending, ascending, distance to nearest seed), best kept, $O(3N^2K)$, the headline; **exact** = cheapest capacity-feasible assignment of the non-seeds to the given seeds (a small generalised assignment problem, classical post-processing, labelled as such).
 
 **Fair baseline.** A sampler uniform over exactly-$K$ seed sets reaches the optimum with probability (#seed sets whose decode is optimal) / $\binom{N}{K}$, computed exactly; results report the device's P(reach) next to it and their ratio. A best gap of 0 % alone is not evidence at these sizes ($\binom{10}{3} = 120$, $\binom{15}{4} = 1365$ seed sets vs 1000 shots).
 

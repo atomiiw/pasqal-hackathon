@@ -9,10 +9,10 @@ Shape (fixed): amplitude $0 \to \Omega_{\max}$ (first 10 % of $T$) → hold → 
 | $R_b$ → $\Omega_{\max} = C_6 / R_b^6$ (model B) | how far apart two customers must be to both be seeds | 7, 9, 12 µm → 7.36, 1.63, 0.29 rad/µs | per tier (seed 0) |
 | $\Omega_{\max}$ as a fraction of the median wanted coupling (model A) | couplings must beat the drive at the end | 0.25, 0.5, 1.0 | per tier (seed 0) |
 | $T$ | slower = more adiabatic; device cap 6000 ns | 2000, 4000, 6000 ns | per tier (seed 0) |
-| $\delta_f = c \times$ nominal | nominal from the model (B: midpoint of the exactly-$K$ window; A: $-s\,\bar a$) | $c$ = 0.7, 1.0, 1.3 | per instance |
+| $\delta_f = c \times$ nominal | nominal from the model (B: midpoint of the exactly-$K$ window; A: $-s\,\bar a$) | $c$ = 0.7, 1.0, 1.3, 1.6, 1.9 | per instance |
 | $\delta_0$ | start far below resonance | $-\max(2\Omega_{\max}, 5)$ (B), $-(2\Omega_{\max} + |\delta_f|)$ (A), capped at 125.66 | fixed |
 
-Score (brief §8.2): P(reach the proven optimum), then best gap, then feasibility rate. Never the mean energy. Shots: 1000.
+Score (brief §8.2): P(reach the proven optimum), then feasibility rate, then best gap. Never the mean energy. Shots: 1000. Selected: S $R_b = 7$ µm, $T = 4000$ ns; M $R_b = 9$, $T = 2000$; L $R_b = 9$, $T = 6000$. Valid shots rose monotonically with $c$ on M and L (that is why the grid goes to 1.9).
 
 Emulator by atom count: ≤ 12 pulser-simulation (QuTiP), ≤ 20 emu-sv, > 20 emu-mps (bond dimension recorded). Model B never needs emu-mps.
 
