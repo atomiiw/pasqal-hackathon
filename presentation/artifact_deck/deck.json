@@ -3,7 +3,7 @@
   "createdOnFiles": {"v": 1, "at": "2026-10-25T03:20:00Z"},
   "lists": "css",
   "title": "Pasqal Track A",
-  "order": ["cover", "problem", "overview", "loss", "aqubo", "distance", "aresult", "lesson", "modelb", "bqubo", "layout", "pulse", "how", "results", "summary"],
+  "order": ["cover", "problem", "overview", "loss", "aqubo", "aexpand", "distance", "aresult", "lesson", "modelb", "bqubo", "layout", "pulse", "how", "results", "summary"],
   "sections": {
     "s1": {"description": "The problem and the two models.", "start": "cover"},
     "s2": {"description": "Model A: idea, QUBO to energy, layout, laser and result.", "start": "loss"},

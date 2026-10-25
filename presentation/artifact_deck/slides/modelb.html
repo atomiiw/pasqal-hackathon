@@ -12,6 +12,6 @@
 <tr><td>then</td><td>every other customer joins the nearest center with room</td></tr>
 </table>
 </div>
-<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">9</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">10</p>
 <aside>Model B 的思路：每辆车选一个客户当中心（图上的星号）。一个 bit 只表示“这个客户是不是中心”，所以每个客户一个原子，S/M/L 分别 4、10、15 个原子，等于客户数。机器负责选出 K 个互相离得远的中心；然后其他客户依次加入最近、还有空位的中心，这一步很轻，容量也在这一步检查。所以容量不用写进能量里，也就不需要任何 slack bit 或惩罚权重。</aside>
 </section>

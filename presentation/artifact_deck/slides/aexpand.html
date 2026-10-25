@@ -1,0 +1,36 @@
+<section id="aexpand" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">A</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:64px;font-weight:600;white-space:nowrap;color:#16202B">One number per atom, one per pair</h2>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:20px">
+<div style="display:flex;flex-direction:row;gap:32px;align-items:center">
+<div style="flex:none;width:260px"><p style="font-size:30px;font-weight:600;color:#5B6675">bits</p></div>
+<div style="flex:none;width:114px;height:47px"><img src="/_blob/a0d2e2fefbac5dbe2cce63ecc7d12487" alt="x squared = x" style="width:114px;height:47px;object-fit:contain"></div>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px;align-items:center">
+<div style="flex:none;width:260px"><p style="font-size:30px;font-weight:600;color:#5B6675">cluster</p></div>
+<div style="flex:none;width:565px;height:90px"><img src="/_blob/04d5603013c4847bebdaa161b2f9fd54" alt="C = const minus sum of S i x i plus sum of 2 d ij x i x j" style="width:565px;height:90px;object-fit:contain"></div>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px;align-items:center">
+<div style="flex:none;width:260px"><p style="font-size:30px;font-weight:600;color:#5B6675">capacity</p></div>
+<div style="flex:none;width:664px;height:90px"><img src="/_blob/93c90eadb998c14f813f53487c3fdc37" alt="P = 36 plus sum of q i (q i minus 12) x i plus sum of 2 q i q j x i x j" style="width:664px;height:90px;object-fit:contain"></div>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px;align-items:center">
+<div style="flex:none;width:260px"><p style="font-size:30px;font-weight:600;color:#16202B">sum</p></div>
+<div style="flex:none;width:662px;height:90px"><img src="/_blob/b25629ffdd4415b3b6e74463f1174b57" alt="C + lambda P = const + sum of a i x i + sum of b ij x i x j" style="width:662px;height:90px;object-fit:contain"></div>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px;align-items:center">
+<div style="flex:none;width:260px"><p style="font-size:30px;font-weight:600;color:#2156A5">pair number b</p></div>
+<div style="flex:none;width:300px;height:44px"><img src="/_blob/9a1fc929efd405ea11de7cf263ab0845" alt="b ij = 2 d ij + 2 lambda q i q j" style="width:300px;height:44px;object-fit:contain"></div>
+<p style="font-size:30px;white-space:nowrap;color:#3D4855">big when i and j are far apart or both heavy</p>
+</div>
+<div style="display:flex;flex-direction:row;gap:32px;align-items:center">
+<div style="flex:none;width:260px"><p style="font-size:30px;font-weight:600;color:#16202B">layout goal</p></div>
+<div style="flex:none;width:560px;height:118px"><img src="/_blob/c23f7c8fcc16b4bac82d4f7d4cf5a571" alt="C6 over r ij to the sixth = s times b ij, so r ij = (C6 over s b ij) to the one sixth" style="width:560px;height:118px;object-fit:contain"></div>
+<p style="font-size:30px;white-space:nowrap;color:#3D4855">one scale s, set by the 5 µm limit</p>
+</div>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">6</p>
+<aside>这里只用了一条规则：bit 的平方等于它自己，x² = x。把 cluster 展开：常数，减去每个客户的 S_i 乘 x_i（S_i 是这个客户到其他所有客户的距离之和），加上每对客户的 2d_ij 乘 x_i x_j。把 capacity 展开：P = (Σ q_i x_i − 6)²，平方拆开再用 x² = x，得到 36，加上每个客户的 q_i(q_i − 12) 乘 x_i，加上每对客户的 2 q_i q_j 乘 x_i x_j。加在一起，总分就是：常数，加每个原子一个数 a，加每对原子一个数 b。b_ij = 2d_ij + 2λ q_i q_j，也就是 i 和 j 都为 1 时额外加的分：两人离得远（距离部分）或者两人都重（容量部分），b 就大，意思是他们不该同车。机器在两个原子都为 1 时会加上 C6/r⁶，所以布局的目标就是让 C6/r_ij⁶ = s·b_ij，也就是 r_ij = (C6 / (s b_ij))^(1/6)。s 是一个统一的比例，由 5 µm 的最小间距决定。b 就是原子必须复现的那个数，这就是下一页的整个布局问题。</aside>
+</section>

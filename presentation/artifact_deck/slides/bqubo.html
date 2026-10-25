@@ -12,6 +12,6 @@
 <tr><td>capacity</td><td>not in the energy</td><td>—</td><td>checked after</td></tr>
 </table>
 </div>
-<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">10</p>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">11</p>
 <aside>Model B 的 QUBO 本身就是机器的能量，不需要翻译。每个原子前面都是同一个 −δ，正好就是激光给的全局 detuning；每对原子前面是 C6/(α·d)⁶，d 是客户距离，α 是比例，只要把原子按客户地图乘 α 摆，机器的耦合就是这个值。和 Model A 那张表对比：A 的每个 bit 系数对不上，这里对上了；A 的原子对摆不出来，这里按地图摆就行。容量不在能量里，在解码时检查。实测还有误差（η 0.1 到 0.9），因为太近的客户要抬到 5 µm 以上，但它们本来就互相阻塞，不影响结果。</aside>
 </section>

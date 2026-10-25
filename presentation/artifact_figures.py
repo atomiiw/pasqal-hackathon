@@ -81,6 +81,14 @@ E([(r"$L_1=3x_A+4x_B+2x_C+3x_D,\quad 5\leq L_1\leq 7$", INK)], "eqA_p_before", 4
 E([(r"$P=(L_1-6)^2$", BLUE)], "eqA_p_after", 40)
 E([(r"$\mathrm{Total\ Loss}=C+\lambda\,P$", INK)], "eqA_total", 44)
 
+# derivation slide: C + lambda P -> one number per atom and per pair
+E([(r"$x^2=x$", INK)], "eqX_rule", 38)
+E([(r"$C=\mathrm{const}-\sum_i S_i\,x_i+\sum_{i<j}2d_{ij}\,x_ix_j$", INK)], "eqX_C", 38)
+E([(r"$P=36+\sum_i q_i(q_i-12)\,x_i+\sum_{i<j}2q_iq_j\,x_ix_j$", INK)], "eqX_P", 38)
+E([(r"$C+\lambda P=\mathrm{const}+$", INK), (r"$\sum_i a_i\,x_i$", ORANGE), (r"$+$", INK), (r"$\sum_{i<j}b_{ij}\,x_ix_j$", BLUE)], "eqX_total", 38)
+E([(r"$b_{ij}=2d_{ij}+2\lambda\,q_iq_j$", BLUE)], "eqX_b", 38)
+E([(r"$\dfrac{C_6}{r_{ij}^{6}}=s\cdot b_{ij}\quad\Rightarrow\quad r_{ij}=\left(\dfrac{C_6}{s\,b_{ij}}\right)^{1/6}$", INK)], "eqX_goal", 38)
+
 # ---------------------------------------------------------------- data
 insts = {t: Instance.load(ROOT / f"instances/{t}_seed0.json") for t in "SML"}
 weights = json.loads((ROOT / "instances/weights.json").read_text())
