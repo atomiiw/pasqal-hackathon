@@ -3,15 +3,16 @@
 <h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">Results</h2>
 <p style="font-size:32px;color:#5B6675">share of 1000 answers that are the best answer</p>
 </div>
-<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:44px">
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;gap:40px">
 <table style="width:1500px;font-size:38px;color:#16202B">
-<tr><th style="width:16%">tier</th><th style="width:28%;text-align:right">machine</th><th style="width:28%;text-align:right">random guess</th><th style="width:28%;text-align:right">better by</th></tr>
-<tr><td>S</td><td style="text-align:right">51–91 %</td><td style="text-align:right">25–27 %</td><td style="text-align:right;color:#2156A5"><b>2–4×</b></td></tr>
-<tr><td>M</td><td style="text-align:right">13–20 %</td><td style="text-align:right">1.6–2.9 %</td><td style="text-align:right;color:#2156A5"><b>7–12×</b></td></tr>
-<tr><td>L</td><td style="text-align:right">2–32 %</td><td style="text-align:right">0–0.2 %</td><td style="text-align:right;color:#2156A5"><b>60–160×</b></td></tr>
+<tr><th style="width:13%">tier</th><th style="width:25%;text-align:right">machine</th><th style="width:30%;text-align:right">random 0/1</th><th style="width:32%;text-align:right">random K seeds</th></tr>
+<tr><td>S</td><td style="text-align:right;color:#2156A5"><b>51–91 %</b></td><td style="text-align:right">25–27 %</td><td style="text-align:right">67 %</td></tr>
+<tr><td>M</td><td style="text-align:right;color:#2156A5"><b>13–20 %</b></td><td style="text-align:right">1.6–2.9 %</td><td style="text-align:right">13–30 %</td></tr>
+<tr><td>L</td><td style="text-align:right;color:#2156A5"><b>2–32 %</b></td><td style="text-align:right">0–0.2 %</td><td style="text-align:right">2.8–4.0 %</td></tr>
 </table>
-<p style="font-size:24px;line-height:1.45;color:#5B6675">3 certified instances per tier · best = proven optimum · random guess = random bitstrings, same decode (brief §9.2) · stricter baseline, random K seeds: M 0.7–1.1×, L 0.7–8× · light-multi decode · global detuning · S, M: pulser-simulation; L: emu-sv · atoms 4 / 10 / 15</p>
+<p style="font-size:32px;line-height:1.4;color:#16202B">vs random 0/1: <b>2–4× · 7–12× · 60–160×</b>     vs random K seeds: <b>about even on S, M · up to 8× on L</b></p>
+<p style="font-size:24px;line-height:1.45;color:#5B6675">3 certified instances per tier · best = proven optimum · both random baselines use the same light-multi decode · random 0/1 = the quantum part replaced by random bits (brief §9.2) · global detuning · S, M: pulser-simulation; L: emu-sv · atoms 4 / 10 / 15</p>
 </div>
 <p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">11</p>
-<aside>机器每个实例输出 1000 个答案，我们数其中有多少个正好是已证明的最好答案，再和乱猜对比：把量子部分换成随机的 0/1，后面的分配步骤完全一样（这是赛题 9.2 节建议的对照）。S 档机器 51% 到 91%，乱猜 25% 到 27%，好 2 到 4 倍；M 档机器 13% 到 20%，乱猜 1.6% 到 2.9%，好 7 到 12 倍；L 档机器 2% 到 32%，乱猜 0 到 0.2%，好 60 到 160 倍（L_seed1 乱猜一次都没中，不计倍数）。如果评委问更强的对照：随机选 K 个中心再分配，M 档大致打平（0.7 到 1.1 倍），L 档 0.7 到 8 倍。机器的主要贡献是让一半左右的答案恰好选出 K 个中心，而乱猜在 L 档只有 3% 能做到。</aside>
+<aside>机器每个实例输出 1000 个答案，数其中有多少个正好是已证明的最好答案。两种对照，后面的分配步骤完全一样。第一种：把量子部分换成随机的 0/1，这是赛题 9.2 节建议的；机器好 2 到 4 倍（S）、7 到 12 倍（M）、60 到 160 倍（L）。第二种更强：直接随机选 K 个中心；S 和 M 档大致打平，L 档最多好 8 倍。我们两种都放出来。机器真正的本事是让大约一半的答案恰好选出 K 个中心，而随机 0/1 在 L 档只有 3% 能做到；当它给出合法答案时，选中最好答案的概率是随机 K 个中心的 1.4 到 15 倍。</aside>
 </section>
