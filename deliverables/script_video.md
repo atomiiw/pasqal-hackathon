@@ -38,4 +38,4 @@ New: a weight limit with no helper bits, and an encoding where the atom layout i
 
 ---
 
-Recording: PowerPoint "Record Slide Show" or OBS, 1080p. Put `demo/run_tier_S.mp4` on its own slide for the pipeline section. Export MP4, upload to YouTube unlisted, paste the link into Devpost.
+Recording: PowerPoint "Record Slide Show" or OBS, 1080p. The video slideshow (8 slides, notes = this script) is the "Byteskip video slides" artifact; its sources are in `deliverables/video_slides/`. The pipeline clip is `deliverables/run_tier_S.mp4` (GIF on the slide). Export MP4, upload to YouTube unlisted, paste the link into Devpost.

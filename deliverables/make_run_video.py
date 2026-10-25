@@ -13,7 +13,7 @@ import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
-OUT = ROOT / "demo"
+OUT = ROOT / "deliverables"
 LOG = OUT / "run_tier_S.log.json"
 CMD = [sys.executable, "-u", "-W", "ignore", "-m", "cvrp.run_all", "--tier", "S"]
 
