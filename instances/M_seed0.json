@@ -1,0 +1,152 @@
+{
+ "tier": "M",
+ "seed": 0,
+ "N": 10,
+ "K": 3,
+ "Q": 20,
+ "coords": [
+  [
+   6,
+   79
+  ],
+  [
+   64,
+   55
+  ],
+  [
+   80,
+   24
+  ],
+  [
+   87,
+   33
+  ],
+  [
+   97,
+   32
+  ],
+  [
+   36,
+   39
+  ],
+  [
+   32,
+   80
+  ],
+  [
+   18,
+   9
+  ],
+  [
+   92,
+   37
+  ],
+  [
+   21,
+   79
+  ]
+ ],
+ "demands": [
+  6,
+  7,
+  6,
+  5,
+  8,
+  2,
+  7,
+  3,
+  6,
+  7
+ ],
+ "depot": [
+  50.0,
+  50.0
+ ],
+ "certificate": [
+  1,
+  0,
+  2,
+  0,
+  0,
+  2,
+  1,
+  2,
+  2,
+  1
+ ],
+ "draws": 0,
+ "references": {
+  "model_optimum": 353.03801659852115,
+  "model_groups": [
+   [
+    0,
+    6,
+    9
+   ],
+   [
+    1,
+    2,
+    5,
+    7
+   ],
+   [
+    3,
+    4,
+    8
+   ]
+  ],
+  "model_n_optimal": 1,
+  "model_method": "set-partition DP (proven)",
+  "model_routed_exactly": 381.8642210926812,
+  "cvrp_optimum": 381.86422109268113,
+  "cvrp_groups": [
+   [
+    0,
+    6,
+    9
+   ],
+   [
+    1,
+    2,
+    5,
+    7
+   ],
+   [
+    3,
+    4,
+    8
+   ]
+  ],
+  "cvrp_tours": [
+   [
+    0,
+    9,
+    6
+   ],
+   [
+    1,
+    2,
+    7,
+    5
+   ],
+   [
+    3,
+    4,
+    8
+   ]
+  ],
+  "cvrp_n_optimal": 1,
+  "cvrp_method": "Held-Karp + set-partition DP (proven)",
+  "status": "proven optimum",
+  "time_s": {
+   "model_dp": 0.02,
+   "cvrp_dp": 0.02
+  },
+  "decomposition_gap_pct": 1.4885767170894944e-14,
+  "model_bruteforce_agrees": true,
+  "cplex_model_optimum": 353.03801659852104,
+  "cplex_status": "integer optimal solution",
+  "cplex_time_s": 0.12,
+  "cplex_agrees": true
+ }
+}

@@ -1,0 +1,202 @@
+{
+ "tier": "L",
+ "seed": 1,
+ "N": 15,
+ "K": 4,
+ "Q": 30,
+ "coords": [
+  [
+   30,
+   29
+  ],
+  [
+   10,
+   88
+  ],
+  [
+   28,
+   96
+  ],
+  [
+   31,
+   54
+  ],
+  [
+   57,
+   6
+  ],
+  [
+   62,
+   77
+  ],
+  [
+   58,
+   2
+  ],
+  [
+   82,
+   66
+  ],
+  [
+   26,
+   43
+  ],
+  [
+   92,
+   65
+  ],
+  [
+   81,
+   73
+  ],
+  [
+   92,
+   3
+  ],
+  [
+   39,
+   38
+  ],
+  [
+   17,
+   48
+  ],
+  [
+   43,
+   30
+  ]
+ ],
+ "demands": [
+  10,
+  5,
+  9,
+  9,
+  10,
+  3,
+  6,
+  7,
+  4,
+  8,
+  5,
+  7,
+  2,
+  4,
+  4
+ ],
+ "depot": [
+  50.0,
+  50.0
+ ],
+ "certificate": [
+  0,
+  2,
+  0,
+  1,
+  0,
+  3,
+  1,
+  1,
+  2,
+  1,
+  2,
+  2,
+  3,
+  2,
+  2
+ ],
+ "draws": 2,
+ "references": {
+  "model_optimum": 454.01503301867706,
+  "model_groups": [
+   [
+    0,
+    8,
+    12,
+    13,
+    14
+   ],
+   [
+    1,
+    2,
+    3
+   ],
+   [
+    4,
+    6,
+    11
+   ],
+   [
+    5,
+    7,
+    9,
+    10
+   ]
+  ],
+  "model_n_optimal": 1,
+  "model_method": "set-partition DP (proven)",
+  "model_routed_exactly": 480.3591589298942,
+  "cvrp_optimum": 472.9065437235268,
+  "cvrp_groups": [
+   [
+    0,
+    3,
+    8,
+    12,
+    13
+   ],
+   [
+    1,
+    2
+   ],
+   [
+    4,
+    6,
+    11,
+    14
+   ],
+   [
+    5,
+    7,
+    9,
+    10
+   ]
+  ],
+  "cvrp_tours": [
+   [
+    3,
+    13,
+    8,
+    0,
+    12
+   ],
+   [
+    1,
+    2
+   ],
+   [
+    11,
+    6,
+    4,
+    14
+   ],
+   [
+    5,
+    10,
+    9,
+    7
+   ]
+  ],
+  "cvrp_n_optimal": 1,
+  "cvrp_method": "Held-Karp + set-partition DP (proven)",
+  "status": "proven optimum",
+  "time_s": {
+   "model_dp": 5.64,
+   "cvrp_dp": 5.69
+  },
+  "decomposition_gap_pct": 1.5759171247003056,
+  "cplex_model_optimum": 454.0150330186769,
+  "cplex_status": "integer optimal solution",
+  "cplex_time_s": 0.16,
+  "cplex_agrees": true
+ }
+}
