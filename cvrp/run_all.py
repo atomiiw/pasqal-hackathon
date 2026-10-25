@@ -24,8 +24,8 @@ from .embedding.ours import embed
 from .evaluate import evaluate_shots
 from .hardware import make_map
 from .instances import Instance, INSTANCE_DIR, ROOT, generate_all
-from .pulse.search import (INSTANCE_GRID, TIER_GRID_A, TIER_GRID_B, qubo_params, random_row, run_point,
-                           score_key, seed_params)
+from .pulse.search import (INSTANCE_GRID, INSTANCE_GRID_A, TIER_GRID_A, TIER_GRID_B, qubo_params, random_row,
+                           run_point, score_key, seed_params)
 from .qubo import build_qubo
 from .reference import compute_references
 from .seeds import SeedModel
@@ -235,7 +235,7 @@ def run_model_a(insts, weights, shots, log, out, run_pulses_on=("S",), verbose=T
             q, maps, X, f, gs = prepared[inst.name]
             for v in ("global", "dmm"):
                 best = None
-                for c in INSTANCE_GRID["c"]:
+                for c in INSTANCE_GRID_A["c"]:
                     row = run_point(inst, q, X, qubo_params(q, maps[v], of, T, c), shots)
                     log.append(base_row(inst, "A-direct", "A-grid-instance", variant=v, atoms=q.n_vars,
                                         **{k: row[k] for k in ("omega_max", "duration", "delta_0", "delta_f", "emulator", "bond_dim",

@@ -14,13 +14,14 @@ from dataclasses import asdict
 import numpy as np
 
 from ..evaluate import evaluate_shots, random_sampler
-from ..hardware import C6, OMEGA_MAX
+from ..hardware import C6, DELTA_MAX, OMEGA_MAX
 from .run import run_sequence
 from .sequence import PulseParams, build_sequence
 
 TIER_GRID_B = dict(Rb=(7.0, 9.0, 12.0), T=(2000, 4000, 6000))
 TIER_GRID_A = dict(omega_frac=(0.25, 0.5, 1.0), T=(2000, 4000, 6000))
-INSTANCE_GRID = dict(c=(0.7, 1.0, 1.3, 1.6, 1.9))
+INSTANCE_GRID = dict(c=(0.7, 1.0, 1.3, 1.6, 1.9))  # model B: delta_f is a few rad/us, far from the limit
+INSTANCE_GRID_A = dict(c=(0.7, 1.0, 1.3))  # model A: delta_f ~ 60 rad/us, 1.9x would exceed 125.66
 
 
 def score_key(ev: dict):
@@ -56,5 +57,6 @@ def qubo_params(q, hmap, omega_frac: float, T: int, c: float = 1.0) -> PulsePara
     wanted = hmap.target_U[iu]
     med = float(np.median(wanted[wanted > 0]))
     omega = min(omega_frac * med, OMEGA_MAX)
-    return PulseParams(omega_max=omega, duration=T, delta_0=-min(125.0, 2 * omega + abs(hmap.delta_global)),
-                       delta_f=c * hmap.delta_global, delta_dmm=hmap.delta_dmm, dmm_weights=hmap.dmm_weights)
+    delta_f = float(np.clip(c * hmap.delta_global, -DELTA_MAX, DELTA_MAX))
+    return PulseParams(omega_max=omega, duration=T, delta_0=-min(DELTA_MAX, 2 * omega + abs(delta_f)),
+                       delta_f=delta_f, delta_dmm=hmap.delta_dmm, dmm_weights=hmap.dmm_weights)
