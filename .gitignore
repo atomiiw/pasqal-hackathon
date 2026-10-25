@@ -13,3 +13,6 @@ __pycache__/
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# team-internal: scripts, recordings, video slides (not part of the submission)
+deliverables/
