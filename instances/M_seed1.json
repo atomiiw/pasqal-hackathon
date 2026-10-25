@@ -6,56 +6,56 @@
  "Q": 20,
  "coords": [
   [
-   31,
-   15
+   16,
+   13
   ],
   [
-   74,
-   53
+   50,
+   16
   ],
   [
-   35,
-   92
+   22,
+   56
+  ],
+  [
+   23,
+   26
+  ],
+  [
+   87,
+   28
   ],
   [
    6,
-   58
-  ],
-  [
-   11,
-   42
-  ],
-  [
-   77,
-   46
-  ],
-  [
-   16,
    95
   ],
   [
-   2,
-   54
+   58,
+   91
   ],
   [
-   35,
-   32
+   83,
+   88
   ],
   [
-   62,
-   13
+   77,
+   90
+  ],
+  [
+   100,
+   30
   ]
  ],
  "demands": [
+  4,
   7,
-  3,
-  3,
-  2,
+  8,
+  6,
+  4,
   5,
-  4,
-  4,
   7,
   7,
+  3,
   1
  ],
  "depot": [
@@ -63,90 +63,90 @@
   50.0
  ],
  "certificate": [
+  2,
+  0,
   0,
   1,
   2,
-  1,
   0,
   1,
   1,
-  0,
-  1,
-  0
+  2,
+  2
  ],
- "draws": 0,
+ "draws": 5,
  "references": {
-  "model_optimum": 364.25183771284713,
+  "model_optimum": 489.3162467855716,
   "model_groups": [
    [
     0,
-    4,
-    8
-   ],
-   [
     1,
-    5,
-    9
+    3
    ],
    [
     2,
-    3,
-    6,
-    7
+    5,
+    6
+   ],
+   [
+    4,
+    7,
+    8,
+    9
    ]
   ],
   "model_n_optimal": 1,
   "model_method": "set-partition DP (proven)",
-  "model_routed_exactly": 377.24099554276336,
-  "cvrp_optimum": 368.0746872125484,
+  "model_routed_exactly": 454.96239471312833,
+  "cvrp_optimum": 454.96239471312833,
   "cvrp_groups": [
    [
     0,
-    4,
-    8,
-    9
-   ],
-   [
     1,
-    5
+    3
    ],
    [
     2,
-    3,
-    6,
-    7
+    5,
+    6
+   ],
+   [
+    4,
+    7,
+    8,
+    9
    ]
   ],
   "cvrp_tours": [
    [
-    8,
-    4,
-    0,
-    9
-   ],
-   [
     1,
-    5
+    0,
+    3
    ],
    [
     2,
-    6,
-    3,
-    7
+    5,
+    6
+   ],
+   [
+    4,
+    9,
+    7,
+    8
    ]
   ],
   "cvrp_n_optimal": 1,
   "cvrp_method": "Held-Karp + set-partition DP (proven)",
   "status": "proven optimum",
   "time_s": {
-   "model_dp": 0.02,
+   "model_dp": 0.01,
    "cvrp_dp": 0.02
   },
-  "decomposition_gap_pct": 2.490339229690576,
+  "decomposition_gap_pct": 0.0,
   "model_bruteforce_agrees": true,
-  "cplex_model_optimum": 364.2518377128471,
+  "cplex_model_optimum": 489.3162467855716,
   "cplex_status": "integer optimal solution",
-  "cplex_time_s": 0.13,
+  "cplex_time_s": 0.16,
   "cplex_agrees": true
  }
 }

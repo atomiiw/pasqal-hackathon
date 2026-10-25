@@ -4,13 +4,15 @@ Notation (same as notes/track-A-understanding.md):
   customers i, j; demands d_i; D = sum d_i; distances d_ij; S_i = sum_{j != i} d_ij
   K trucks, capacity Q.
 
+Capacity penalty, all tiers:  P_cap = sum_k (L_k - D/K)^2,  L_k = load of truck k.
+
 Tier S (K = 2): one bit per customer, x_i = 1 -> truck 1, x_i = 0 -> truck 2.
-  Total = C + lam * P
+  Total = C + lam * P_cap
   C = sum_{i<j} d_ij (1 - x_i - x_j + 2 x_i x_j)        (distance inside each truck)
-  P = (sum_i d_i x_i - D/2)^2                            (load balance; window D-Q <= L1 <= Q)
-  a_i  = -S_i + lam * d_i (d_i - D)
-  b_ij = 2 d_ij + 2 lam d_i d_j
-  const = sum_{i<j} d_ij + lam D^2 / 4
+  P_cap = (L_1 - D/2)^2 + (L_2 - D/2)^2 = 2 (sum_i d_i x_i - D/2)^2
+  a_i  = -S_i + 2 lam d_i (d_i - D)
+  b_ij = 2 d_ij + 4 lam d_i d_j
+  const = sum_{i<j} d_ij + lam D^2 / 2
 
 Tiers M, L (K >= 3): one-hot x_ik, N*K bits.
   Total = C + A * P_assign + lam * P_cap
@@ -89,7 +91,8 @@ class QUBO:
         if self.encoding == "onebit":
             same = 1 - x[:, None] - x[None, :] + 2 * np.outer(x, x)
             C = np.triu(dist * same, 1).sum()
-            P = (d @ x - d.sum() / 2) ** 2
+            L1 = d @ x
+            P = (L1 - d.sum() / 2) ** 2 + ((d.sum() - L1) - d.sum() / 2) ** 2
             return float(C + self.lam * P)
         X = x.reshape(inst.N, inst.K)
         C = sum(np.triu(dist * np.outer(X[:, k], X[:, k]), 1).sum() for k in range(inst.K))
@@ -129,10 +132,10 @@ def build_qubo(inst: Instance, lam: float, A: float = 0.0) -> QUBO:
     S = dist.sum(axis=1)
 
     if K == 2:
-        a = -S + lam * d * (d - D)
-        B = 2 * dist + 2 * lam * np.outer(d, d)
+        a = -S + 2 * lam * d * (d - D)
+        B = 2 * dist + 4 * lam * np.outer(d, d)
         np.fill_diagonal(B, 0.0)
-        const = np.triu(dist, 1).sum() + lam * D ** 2 / 4
+        const = np.triu(dist, 1).sum() + lam * D ** 2 / 2
         labels = [f"x{i}" for i in range(N)]
         kind = np.ones((N, N), int)
         np.fill_diagonal(kind, 0)

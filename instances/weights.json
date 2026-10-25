@@ -1,0 +1,200 @@
+{
+ "M_seed0": {
+  "qubo_min": 355.58600555042267,
+  "feasible": true,
+  "groups": [
+   [
+    0,
+    6,
+    9
+   ],
+   [
+    1,
+    2,
+    5,
+    7
+   ],
+   [
+    3,
+    4,
+    8
+   ]
+  ],
+  "model_cost": 353.03801659852115,
+  "model_optimum": 353.03801659852115,
+  "matches_model_optimum": true,
+  "solver": "integer optimal, tolerance",
+  "encoding": "onehot",
+  "n_vars": 30,
+  "lam": 1.2739944759505748,
+  "A": 159.4005739411836,
+  "a_min": -465.1592481693216,
+  "a_max": -251.128176209625,
+  "b_max": 318.8011478823672,
+  "const": 2973.7417568663086,
+  "pairs_same_truck": 135,
+  "pairs_same_customer": 30,
+  "pairs_zero": 270
+ },
+ "M_seed1": {
+  "qubo_min": 493.33200917458134,
+  "feasible": true,
+  "groups": [
+   [
+    0,
+    2,
+    5
+   ],
+   [
+    1,
+    3,
+    4,
+    9
+   ],
+   [
+    6,
+    7,
+    8
+   ]
+  ],
+  "model_cost": 492.60947539137726,
+  "model_optimum": 489.3162467855716,
+  "matches_model_optimum": false,
+  "solver": "integer optimal solution",
+  "encoding": "onehot",
+  "n_vars": 30,
+  "lam": 1.083800674807173,
+  "A": 241.44274493754872,
+  "a_min": -472.65355556307895,
+  "a_max": -277.93070098939023,
+  "b_max": 482.88548987509745,
+  "const": 3391.2931242683526,
+  "pairs_same_truck": 135,
+  "pairs_same_customer": 30,
+  "pairs_zero": 270
+ },
+ "M_seed2": {
+  "qubo_min": 401.60467752444515,
+  "feasible": true,
+  "groups": [
+   [
+    0,
+    1,
+    8
+   ],
+   [
+    2,
+    4,
+    5,
+    7
+   ],
+   [
+    3,
+    6,
+    9
+   ]
+  ],
+  "model_cost": 374.5970526685817,
+  "model_optimum": 329.20668691424845,
+  "matches_model_optimum": false,
+  "solver": "integer optimal, tolerance",
+  "encoding": "onehot",
+  "n_vars": 30,
+  "lam": 1.4468370458498299,
+  "A": 129.3454937122652,
+  "a_min": -399.42174227090015,
+  "a_max": -173.23288410304338,
+  "b_max": 258.6909874245304,
+  "const": 2358.80928188341,
+  "pairs_same_truck": 135,
+  "pairs_same_customer": 30,
+  "pairs_zero": 270
+ },
+ "S_seed0": {
+  "qubo_min": 118.14624006872396,
+  "feasible": true,
+  "groups": [
+   [
+    0,
+    2
+   ],
+   [
+    1,
+    3
+   ]
+  ],
+  "model_cost": 110.14276442450179,
+  "model_optimum": 110.14276442450179,
+  "matches_model_optimum": true,
+  "solver": "brute force",
+  "encoding": "onebit",
+  "n_vars": 4,
+  "lam": 16.00695128844418,
+  "A": 0.0,
+  "a_min": -1310.6349448465712,
+  "a_max": -855.6361442108005,
+  "b_max": 1083.9091574497015,
+  "const": 1632.0092966248815,
+  "pairs_same_truck": 6,
+  "pairs_same_customer": 0,
+  "pairs_zero": 0
+ },
+ "S_seed1": {
+  "qubo_min": 123.19530979521016,
+  "feasible": true,
+  "groups": [
+   [
+    0,
+    3
+   ],
+   [
+    1,
+    2
+   ]
+  ],
+  "model_cost": 122.26128317663303,
+  "model_optimum": 122.26128317663303,
+  "matches_model_optimum": true,
+  "solver": "brute force",
+  "encoding": "onebit",
+  "n_vars": 4,
+  "lam": 1.8680532371541687,
+  "A": 0.0,
+  "a_min": -318.0966647704929,
+  "a_max": -199.7780199110323,
+  "b_max": 263.6796408038603,
+  "const": 480.3071574904056,
+  "pairs_same_truck": 6,
+  "pairs_same_customer": 0,
+  "pairs_zero": 0
+ },
+ "S_seed2": {
+  "qubo_min": 173.94865026133584,
+  "feasible": true,
+  "groups": [
+   [
+    0,
+    3
+   ],
+   [
+    1,
+    2
+   ]
+  ],
+  "model_cost": 155.42599058230815,
+  "model_optimum": 155.42599058230815,
+  "matches_model_optimum": true,
+  "solver": "brute force",
+  "encoding": "onebit",
+  "n_vars": 4,
+  "lam": 9.26132983951391,
+  "A": 0.0,
+  "a_min": -772.1485739016731,
+  "a_max": -436.3064886713183,
+  "b_max": 627.333328712627,
+  "const": 1087.555606285889,
+  "pairs_same_truck": 6,
+  "pairs_same_customer": 0,
+  "pairs_zero": 0
+ }
+}

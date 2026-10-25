@@ -59,7 +59,9 @@ def draw_maps(insts: list[Instance]) -> Path:
 def render(insts: list[Instance]) -> str:
     lines = ["# Instances (A2)", ""]
     lines += [f"Depot (50, 50). Coordinates: uniform integers in [0,100]². Demands: uniform in the tier range. "
-              f"Accepted only if an exact packing exists and ρ = D/(K·Q) ∈ [{RHO_MIN}, {RHO_MAX}]. "
+              f"Accepted only if (a) an exact packing exists, (b) ρ = D/(K·Q) ∈ [{RHO_MIN}, {RHO_MAX}], "
+              f"(c) capacity binds: the optimum of the clustering objective without the capacity rule is overloaded, "
+              f"so every instance actually tests the capacity encoding. "
               f"RNG: `numpy.random.default_rng([ord(tier), seed])`.", ""]
     lines += ["Reference method: set-partition DP (proven optimum). TSP per group: Held-Karp (exact). "
               "Cross-checks: brute force over all assignments (S, M) and CPLEX MILP (all tiers). "

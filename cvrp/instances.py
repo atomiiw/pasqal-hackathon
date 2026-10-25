@@ -185,7 +185,20 @@ def validate(inst: Instance, assignment) -> tuple[bool, str]:
 # ---------------------------------------------------------------------------
 # Generator
 # ---------------------------------------------------------------------------
-def generate(tier: str, seed: int, max_draws: int = 10_000) -> Instance:
+def capacity_binds(inst: Instance) -> bool:
+    """True if the optimum of the clustering objective WITHOUT capacity is overloaded.
+
+    Only such instances test the capacity encoding; on the others lambda = 0 would do.
+    """
+    from .reference import pairwise_subset_cost, partition_optimum
+
+    w = pairwise_subset_cost(inst.dist_matrix())
+    all_fit = np.ones(1 << inst.N, bool)
+    _, groups, _ = partition_optimum(w, all_fit, inst.K, inst.N)
+    return any(sum(inst.demands[i] for i in g) > inst.Q for g in groups)
+
+
+def generate(tier: str, seed: int, max_draws: int = 10_000, require_binding: bool = True) -> Instance:
     t = TIERS[tier]
     rng = np.random.default_rng([tier.encode()[0], seed])
     for draw in range(max_draws):
@@ -202,6 +215,8 @@ def generate(tier: str, seed: int, max_draws: int = 10_000) -> Instance:
                         certificate=cert, draws=draw)
         ok, msg = validate(inst, cert)
         assert ok, msg
+        if require_binding and not capacity_binds(inst):
+            continue
         return inst
     raise RuntimeError(f"no feasible instance for {tier} seed {seed} in {max_draws} draws")
 

@@ -6,26 +6,26 @@
  "Q": 7,
  "coords": [
   [
-   29,
-   37
+   96,
+   55
   ],
   [
-   59,
-   2
+   39,
+   5
   ],
   [
-   41,
-   26
+   11,
+   92
   ],
   [
-   50,
-   91
+   46,
+   15
   ]
  ],
  "demands": [
-  3,
-  4,
   1,
+  4,
+  3,
   4
  ],
  "depot": [
@@ -33,14 +33,14 @@
   50.0
  ],
  "certificate": [
-  0,
-  0,
   1,
+  0,
+  0,
   1
  ],
- "draws": 0,
+ "draws": 3,
  "references": {
-  "model_optimum": 87.93962374748389,
+  "model_optimum": 155.42599058230815,
   "model_groups": [
    [
     0,
@@ -53,8 +53,8 @@
   ],
   "model_n_optimal": 1,
   "model_method": "set-partition DP (proven)",
-  "model_routed_exactly": 228.10627484219253,
-  "cvrp_optimum": 228.10627484219253,
+  "model_routed_exactly": 340.56462050619257,
+  "cvrp_optimum": 340.56462050619257,
   "cvrp_groups": [
    [
     0,
@@ -84,7 +84,7 @@
   },
   "decomposition_gap_pct": 0.0,
   "model_bruteforce_agrees": true,
-  "cplex_model_optimum": 87.93962374748389,
+  "cplex_model_optimum": 155.42599058230815,
   "cplex_status": "integer optimal solution",
   "cplex_time_s": 0.0,
   "cplex_agrees": true

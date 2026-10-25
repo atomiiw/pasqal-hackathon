@@ -140,13 +140,13 @@
   "status": "proven optimum",
   "time_s": {
    "model_dp": 0.02,
-   "cvrp_dp": 0.02
+   "cvrp_dp": 0.03
   },
   "decomposition_gap_pct": 1.4885767170894944e-14,
   "model_bruteforce_agrees": true,
   "cplex_model_optimum": 353.03801659852104,
   "cplex_status": "integer optimal solution",
-  "cplex_time_s": 0.12,
+  "cplex_time_s": 0.1,
   "cplex_agrees": true
  }
 }
