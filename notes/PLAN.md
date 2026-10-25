@@ -24,7 +24,7 @@ Two models, one story: the textbook-style QUBO (model A) is derived, its weights
 | A3 layout | model A: embedder + baselines + η + ground-state rank; model B: map scale α, floor, radius compression | **done for A (negative result), done for B** | `cvrp/embedding/`, `cvrp/seeds.py` |
 | A4 pulse | sequence builder (global / DMM), emulator runner, grid | **sequence + runner done; grid + results next** | `cvrp/pulse/` |
 | Results | `results.csv`, README one-command | in progress | `results/`, `README.md` |
-| Report (≤ 4 pages) | model, variable accounting, embedding, pulse, results, what did not work, AI use | not started | `report/` |
+| Report (≤ 4 pages) | model, variable accounting, embedding, pulse, results, what did not work, AI use | **done** | `report/report.md` |
 
 ## 4. Brief criteria → where covered
 
@@ -47,7 +47,7 @@ Two models, one story: the textbook-style QUBO (model A) is derived, its weights
 | SA / CPLEX settings reported | CPLEX time limits in code; SA helper returns its parameters (SA not needed: all references proven) | done |
 | Random-sampler comparison ("how much work does the quantum part do") | rows `B-random-*`, `A-random`, columns `*_random_K`, `p_reach_ratio_vs_random_K` | done |
 | Repo: README one-command repro, pinned env | `README.md`, `requirements.txt` | done |
-| Report: what did not work, where AI was used | §6, §6b here; `report/` | report todo (deliverable session) |
+| Report: what did not work, where AI was used | `report/report.md` §6–7 | done |
 
 ## 5. Decisions and why
 

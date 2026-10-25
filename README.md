@@ -21,6 +21,7 @@ Outputs: `results/results.csv` (one row per instance × method × seed), `result
 
 | file | what |
 |---|---|
+| `report/report.md` | the report (model, variable accounting, embedding, pulse, results, what did not work, AI use) |
 | `notes/PLAN.md` | plan, claims, criteria checklist, decisions, what did not work, friction log |
 | `notes/instances.md` | the 9 instances, certificates, proven optima (A2) |
 | `notes/qubo.md` | model A formulas and weights, hardware mapping, model B (A1) |
