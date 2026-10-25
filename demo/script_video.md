@@ -18,7 +18,7 @@ We started like everyone: write the cost of a plan as a formula over bits, which
 
 ▶ **What we changed**
 
-So we changed what a bit means. A bit is now "customer i is the centre of a truck". One atom per customer, placed on the customer map. Nearby atoms push each other apart, so nearby customers cannot both be centres. We fire the laser, read the atoms, and get K centres spread across the map. Everyone else joins the nearest centre that still has room. That last step is a few lines of ordinary code.
+So we changed what a bit stands for. Think of building each truck’s group around one customer; we call that customer the anchor. Three trucks means three anchors, one per truck, and every other customer gets attached to one of them. A bit now means “this customer is an anchor”. We put one atom per customer, placed on the customer map. Atoms that sit close together push each other apart, so two customers who are close on the map will not both become anchors. When we fire the laser and read the atoms, the ones that read 1 are the anchors, and they come out spread across the map, which is what you want: one truck per area. Then every other customer joins the nearest anchor whose truck still has room. That last step is a few lines of ordinary code.
 
 ▶ **How it runs on a real instance**
 
