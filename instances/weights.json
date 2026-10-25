@@ -196,5 +196,137 @@
   "pairs_same_truck": 6,
   "pairs_same_customer": 0,
   "pairs_zero": 0
+ },
+ "L_seed0": {
+  "qubo_min": 482.0980151074132,
+  "feasible": true,
+  "groups": [
+   [
+    0,
+    6,
+    12,
+    13
+   ],
+   [
+    1,
+    9,
+    11
+   ],
+   [
+    2,
+    4,
+    7
+   ],
+   [
+    3,
+    5,
+    8,
+    10,
+    14
+   ]
+  ],
+  "model_cost": 475.3612606668783,
+  "model_optimum": 475.36126066687825,
+  "matches_model_optimum": true,
+  "solver": "integer optimal solution",
+  "encoding": "onehot",
+  "n_vars": 60,
+  "lam": 0.06296032187415923,
+  "A": 113.20481388088058,
+  "a_min": -135.2409265368363,
+  "a_max": -115.97506804334358,
+  "b_max": 226.40962776176116,
+  "const": 1825.5668600083814,
+  "pairs_same_truck": 420,
+  "pairs_same_customer": 90,
+  "pairs_zero": 1260
+ },
+ "L_seed1": {
+  "qubo_min": 589.4145245111558,
+  "feasible": true,
+  "groups": [
+   [
+    0,
+    7,
+    10
+   ],
+   [
+    1,
+    2,
+    8
+   ],
+   [
+    3,
+    4,
+    5,
+    11
+   ],
+   [
+    6,
+    9,
+    12,
+    13,
+    14
+   ]
+  ],
+  "model_cost": 577.220074620411,
+  "model_optimum": 534.5752780978445,
+  "matches_model_optimum": false,
+  "solver": "integer optimal, tolerance",
+  "encoding": "onehot",
+  "n_vars": 60,
+  "lam": 1.393651416085163,
+  "A": 192.41062319236067,
+  "a_min": -701.0933900634452,
+  "a_max": -255.8217626242356,
+  "b_max": 384.82124638472135,
+  "const": 5899.582122315554,
+  "pairs_same_truck": 420,
+  "pairs_same_customer": 90,
+  "pairs_zero": 1260
+ },
+ "L_seed2": {
+  "qubo_min": 460.65148719128797,
+  "feasible": true,
+  "groups": [
+   [
+    0,
+    6,
+    9,
+    14
+   ],
+   [
+    1,
+    2,
+    4,
+    8
+   ],
+   [
+    3,
+    7,
+    13
+   ],
+   [
+    5,
+    10,
+    11,
+    12
+   ]
+  ],
+  "model_cost": 459.2157628972166,
+  "model_optimum": 459.2157628972166,
+  "matches_model_optimum": true,
+  "solver": "integer optimal solution",
+  "encoding": "onehot",
+  "n_vars": 60,
+  "lam": 0.014215092020505742,
+  "A": 151.80334826348945,
+  "a_min": -156.4090380781333,
+  "a_max": -153.02584617725296,
+  "b_max": 303.6066965269789,
+  "const": 2305.8357852938657,
+  "pairs_same_truck": 420,
+  "pairs_same_customer": 90,
+  "pairs_zero": 1260
  }
 }

@@ -84,7 +84,11 @@ def tune_A(inst: Instance, lam: float) -> float:
         _, x, _ = exact_min(q, time_limit=60)
         return q.decode(x) is not None
 
-    return _search(ok, dist.sum(axis=1).max(), factor=1.5, bisect_steps=8)
+    A_star = _search(ok, dist.sum(axis=1).max(), factor=1.5, bisect_steps=8)
+    # the one-hot coupling 2A must be the strongest coupling: a hard constraint has to dominate
+    q0 = build_qubo(inst, lam, 0.0)
+    strongest_objective_pair = float(q0.B.max())
+    return max(A_star, strongest_objective_pair / 2)
 
 
 def tune(inst: Instance, verbose=True) -> dict:
