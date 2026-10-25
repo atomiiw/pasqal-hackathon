@@ -1,0 +1,42 @@
+<section id="slots" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:44px">
+<div style="display:flex;flex-direction:column;gap:12px">
+<p style="font-size:24px;font-weight:600;letter-spacing:3px;text-transform:uppercase;color:#2156A5">A1 → A3 · 4 expanded · 5 Pasqal energy · 6 mismatch</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:60px;font-weight:600;line-height:1.1;color:#16202B">Same two slots, not the same freedom</h2>
+</div>
+<div style="display:flex;flex-direction:row;gap:48px">
+<div style="flex:1;display:flex;flex-direction:column;gap:40px">
+<div style="display:flex;flex-direction:row;gap:24px;align-items:start">
+<p style="width:52px;height:52px;border-radius:50%;background:#2156A5;color:#F7F6F2;font-size:26px;font-weight:600;text-align:center;line-height:2">4</p>
+<div style="display:flex;flex-direction:column;gap:16px">
+<img src="/_blob/9798985d7ac4fb6b2136f83f704081d2" alt="Total Loss = const + sum of a i x i + sum of b ij x i x j" style="width:860px;height:105px;object-fit:contain">
+<div style="display:flex;flex-direction:row;gap:56px;align-items:center">
+<img src="/_blob/3aae9302c58b9f345d101408b1cc5c39" alt="a i = minus S i plus lambda q i (q i minus D)" style="width:382px;height:44px;object-fit:contain">
+<img src="/_blob/64c19118c1a7d802c4b6d9da87228642" alt="b ij = 2 d ij plus 2 lambda q i q j" style="width:300px;height:44px;object-fit:contain">
+</div>
+<p style="font-size:24px;color:#5B6675">S = the sum of customer i’s distances to everyone else.</p>
+</div>
+</div>
+<div style="display:flex;flex-direction:row;gap:24px;align-items:start">
+<p style="width:52px;height:52px;border-radius:50%;background:#2156A5;color:#F7F6F2;font-size:26px;font-weight:600;text-align:center;line-height:2">5</p>
+<div style="display:flex;flex-direction:column;gap:16px">
+<img src="/_blob/22f2ee8ce00dec5b8b266f2c82cf3c11" alt="E = sum of minus delta x i + sum of C6 over r ij to the sixth x i x j" style="width:648px;height:135px;object-fit:contain">
+<p style="font-size:24px;color:#5B6675">δ = laser detuning, one value for every atom · r = distance between two atoms.</p>
+</div>
+</div>
+</div>
+<div style="width:640px;display:flex;flex-direction:column;gap:28px">
+<table style="font-size:24px;color:#16202B">
+<tr><th style="width:24%">6 term</th><th style="width:28%">our QUBO</th><th style="width:30%">Pasqal</th><th style="width:18%">match?</th></tr>
+<tr><td>per atom</td><td style="color:#A8540F">a, one per customer</td><td>−δ, same for all</td><td style="color:#A8540F">no</td></tr>
+<tr><td>pair value</td><td style="color:#2156A5">b, many values</td><td>C₆ / r⁶, set by distance</td><td>approx.</td></tr>
+<tr><td>pair sign</td><td>positive</td><td>positive</td><td style="color:#2156A5">yes</td></tr>
+</table>
+<div style="display:flex;flex-direction:column;gap:16px;background:#FDFCFA;border:1px solid #E4E1DA;border-radius:20px;padding:36px">
+<p style="font-size:26px;line-height:1.4;color:#3D4855">On M and L the per-atom mismatch is harmless on valid answers: each customer has exactly one bit on, so that sum is a constant.</p>
+<p style="font-size:26px;line-height:1.4;color:#16202B"><b>The pair slot is the real problem:</b> <span style="color:#A8540F">some pairs want 0, and 1/r⁶ is never 0.</span></p>
+</div>
+</div>
+</div>
+<div style="position:absolute;left:128px;bottom:64px;width:1664px;display:flex;flex-direction:row;justify-content:space-between"><p style="font-size:24px;color:#6B7480">Track A · DuQuantum × Pasqal</p><p style="font-size:24px;color:#6B7480">5 / 10</p></div>
+<aside>[70 秒] 这页是转折。展开后，我们的 loss 就是每个原子一个数 a、每对原子一个数 b。Pasqal 在激光关掉时的能量也正好是这两个槽位：每个原子前面是 −δ，每对原子前面是 C6/r⁶。槽位一样，自由度不一样。橙色：我们每个客户的 a 都不同，激光只给一个 δ。蓝色：b 有很多不同的值，只能靠距离去近似；符号都为正，这点吻合。M 和 L 档上，橙色那项在合法答案上是常数，不影响排序；真正的问题在原子对：有些对需要 0，而 1/r⁶ 永远不是 0。</aside>
+</section>

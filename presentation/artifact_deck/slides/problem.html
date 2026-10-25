@@ -1,18 +1,14 @@
 <section id="problem" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:48px">
-<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">The problem</h2>
-<div style="flex:1;display:flex;flex-direction:row;gap:80px;align-items:center">
-<img src="/_blob/8aedb3874e1c698732d7c457b8988e4a" alt="Tier M: 10 customers coloured by truck in the proven optimum, depot in the centre" style="width:520px;height:520px;object-fit:contain">
-<div style="flex:1;display:flex;flex-direction:column;gap:36px">
-<p style="font-size:38px;line-height:1.4;color:#16202B">Assign each customer to one truck. Every truck carries at most Q. Customers on a truck should be close.</p>
-<table style="width:1000px;font-size:30px;color:#16202B">
-<tr><th style="width:20%">tier</th><th style="width:30%">customers N</th><th style="width:25%">trucks K</th><th style="width:25%">capacity Q</th></tr>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">The problem: customers into trucks, fewest atoms</h2>
+<div style="flex:1;display:flex;flex-direction:row;gap:96px;align-items:center">
+<img src="/_blob/8aedb3874e1c698732d7c457b8988e4a" alt="Tier M: 10 customers coloured by truck in the proven optimum, depot in the centre" style="width:540px;height:540px;object-fit:contain">
+<table style="flex:1;font-size:36px;color:#16202B">
+<tr><th style="width:22%">tier</th><th style="width:30%">customers</th><th style="width:24%">trucks</th><th style="width:24%">capacity</th></tr>
 <tr><td>S</td><td>4</td><td>2</td><td>7</td></tr>
 <tr><td>M</td><td>10</td><td>3</td><td>20</td></tr>
 <tr><td>L</td><td>15</td><td>4</td><td>30</td></tr>
 </table>
-<p style="font-size:30px;line-height:1.4;color:#5B6675">Score: <b style="color:#16202B">fewest atoms</b> (one bit = one atom, max 80) · spacing ≥ 5 µm · radius ≤ 38 µm</p>
-</div>
 </div>
 <p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">2</p>
-<aside>问题：把每个客户分给一辆车，每辆车装的货不超过容量 Q，同一辆车上的客户要离得近。三个档：S 是 4 个客户 2 辆车，M 是 10 个客户 3 辆车，L 是 15 个客户 4 辆车。评分重点是原子越少越好：一个 bit 就是一个原子，最多 80 个；原子间距至少 5 µm，整体半径不超过 38 µm。每档我们做了 3 个实例，都用精确算法算出了标准答案。左图是 M 档一个实例的最优分组，颜色代表车，中间方块是仓库。</aside>
+<aside>问题：把每个客户分给一辆车，每辆车装的货不超过容量，同一辆车上的客户要离得近。三个档：S 是 4 个客户 2 辆车，M 是 10 个客户 3 辆车，L 是 15 个客户 4 辆车。评分重点是原子越少越好：一个 bit 就是一个原子，最多 80 个；原子间距至少 5 µm，整体半径不超过 38 µm。每档我们做了 3 个实例，都用精确算法算出了标准答案（动态规划，并和 CPLEX、暴力枚举交叉核对）。左图是 M 档一个实例的最优分组，颜色代表车，中间方块是仓库。</aside>
 </section>

@@ -10,9 +10,7 @@
 <tr><td>S · seed 1</td><td style="text-align:right">89 %</td><td style="text-align:right">4 %</td><td style="text-align:right">15 %</td></tr>
 <tr><td>S · seed 2</td><td style="text-align:right">95 %</td><td style="text-align:right">94 %</td><td style="text-align:right">15 %</td></tr>
 <tr><td>M, L</td><td style="text-align:right;color:#A8540F">no layout</td><td style="text-align:right;color:#A8540F">—</td><td style="text-align:right;color:#A8540F">—</td></tr>
-</table>
-<p style="font-size:30px;color:#5B6675">laser grid per tier: Ω = ¼, ½, 1 × typical pair coupling · T = 2000, 4000, 6000 ns · final δ from the QUBO · 1000 shots</p>
-</div>
+</table></div>
 <p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">7</p>
 <aside>Model A 只能在 S 档跑。激光也是每档一个小网格：强度取典型原子对耦合的四分之一、一半、一倍（都不超过设备上限 12.57），最终 δ 由 QUBO 的线性项决定，时长 2000、4000、6000 ns，每个设置 1000 次。结果不稳定：seed 2 有 94% 的答案是最好答案，但 seed 0 和 seed 1 只有 3% 到 4%，比乱按 0/1 的 13% 到 15% 还差。原因就是上一页的布局误差：S_seed0 的最优解在机器的实际能量里排到 16 个中的第 8 名。M 和 L 档根本摆不出来，所以没有结果。</aside>
 </section>

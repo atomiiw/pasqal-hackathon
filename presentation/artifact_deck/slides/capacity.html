@@ -1,0 +1,18 @@
+<section id="capacity" data-transition="fade" style="background:#F7F6F2;color:#16202B;font-family:'IBM Plex Sans', Arial, sans-serif;padding:112px 128px 160px;display:flex;flex-direction:column;gap:56px">
+<div style="display:flex;flex-direction:row;gap:32px;align-items:baseline">
+<p style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#2156A5">3</p>
+<h2 style="font-family:'Source Serif 4', Georgia, serif;font-size:72px;font-weight:600;color:#16202B">Capacity</h2>
+</div>
+<div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:56px">
+<img src="/_blob/8e6086fa4cd6dcf97083da34b74a13b2" alt="P capacity = (3 x A + 4 x B + 2 x C + 3 x D minus 6) squared" style="width:1126px;height:81px;object-fit:contain">
+<table style="width:1000px;font-size:30px;color:#16202B">
+<tr><th style="width:28%;text-align:center">bitstring</th><th style="width:28%;text-align:center">loads</th><th style="width:20%;text-align:center">P</th><th style="width:24%;text-align:center">valid?</th></tr>
+<tr><td style="text-align:center">1001</td><td style="text-align:center">6 | 6</td><td style="text-align:center">0</td><td style="text-align:center;color:#2156A5">yes</td></tr>
+<tr><td style="text-align:center">1100</td><td style="text-align:center">7 | 5</td><td style="text-align:center">1</td><td style="text-align:center;color:#2156A5">yes</td></tr>
+<tr><td style="text-align:center">1110</td><td style="text-align:center">9 | 3</td><td style="text-align:center">9</td><td style="text-align:center;color:#A8540F">no</td></tr>
+<tr><td style="text-align:center">1111</td><td style="text-align:center">12 | 0</td><td style="text-align:center">36</td><td style="text-align:center;color:#A8540F">no</td></tr>
+</table>
+</div>
+<p style="position:absolute;right:128px;bottom:64px;width:200px;font-size:24px;text-align:right;color:#6B7480">6</p>
+<aside>系数是每个客户的需求，6 是总需求 12 的一半。合法分法得 0 或 1 分，超载至少 4 分，λ 让超载永远不划算。不需要 slack bit。代价：合法分法里它仍然偏爱最平均的，M_seed2 因此在量子之前就损失 13.8%。</aside>
+</section>
